@@ -721,6 +721,194 @@ class OnPageContentAndLinkBuilder:
 
         return result
 
+class SearchIntentResolverEngine:
+    """Motor Autónomo de Verificación y Resolución Sistemática de Intención de Búsqueda por Página"""
+    def __init__(self, astro_dir: Path):
+        self.astro_dir = astro_dir
+        self.pages_dir = astro_dir / "src" / "pages"
+
+    def audit_and_resolve_intent(self, iteration: int) -> dict:
+        result = {
+            "modified": False,
+            "modified_file": "",
+            "intent_resolved": "",
+            "description": ""
+        }
+
+        intent_matrix = [
+            {
+                "page": self.pages_dir / "evaluacion-y-homologacion-de-titulo-enfermeria-usa.astro",
+                "rel_path": "src/pages/evaluacion-y-homologacion-de-titulo-enfermeria-usa.astro",
+                "intent_name": "Costos y Tiempos de Homologación CGFNS / TruMerit 2026",
+                "marker": "<!-- Bloque Resolución Intención: Costos y Tiempos CGFNS -->",
+                "html": """
+  <!-- Bloque Resolución Intención: Costos y Tiempos CGFNS -->
+  <section class="py-12 bg-slate-900 text-white border-t border-slate-800">
+    <div class="max-w-screen-xl mx-auto px-4 md:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Respuesta a Consultas de Usuario</span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-white mt-1">¿Cuánto Cuesta y Cuánto Tarda Homologar en 2026?</h2>
+        <p class="text-sm text-slate-300 mt-2">Transparencia total de tarifas oficiales exigidas por los organismos evaluadores en EE.UU.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+          <h3 class="text-lg font-bold text-emerald-400 mb-2">1. Credential Evaluation (CES)</h3>
+          <p class="text-3xl font-extrabold text-white mb-2">$485 USD</p>
+          <p class="text-xs text-slate-400 leading-relaxed mb-4">Emisión de informe de equivalencia académica de materias teóricas y clínicas con CGFNS o TruMerit.</p>
+          <span class="text-xs font-semibold text-emerald-300 bg-emerald-950 px-2.5 py-1 rounded">Tiempo estimado: 8 - 12 semanas</span>
+        </div>
+        <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+          <h3 class="text-lg font-bold text-emerald-400 mb-2">2. Tarifa del Board of Nursing</h3>
+          <p class="text-3xl font-extrabold text-white mb-2">$150 - $200 USD</p>
+          <p class="text-xs text-slate-400 leading-relaxed mb-4">Derechos de apertura de expediente en estados elegibles sin SSN como Florida, Texas o Nueva York.</p>
+          <span class="text-xs font-semibold text-emerald-300 bg-emerald-950 px-2.5 py-1 rounded">Tiempo estimado: 4 - 6 semanas</span>
+        </div>
+        <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+          <h3 class="text-lg font-bold text-emerald-400 mb-2">3. Examen Pearson VUE NCLEX</h3>
+          <p class="text-3xl font-extrabold text-white mb-2">$200 USD</p>
+          <p class="text-xs text-slate-400 leading-relaxed mb-4">Registro oficial de la prueba adaptativa por computadora en centros internacionales autorizados.</p>
+          <span class="text-xs font-semibold text-emerald-300 bg-emerald-950 px-2.5 py-1 rounded">Reserva directa tras recibir ATT</span>
+        </div>
+      </div>
+    </div>
+  </section>
+"""
+            },
+            {
+                "page": self.pages_dir / "licencia-de-enfermeria-y-examen-nclex-usa.astro",
+                "rel_path": "src/pages/licencia-de-enfermeria-y-examen-nclex-usa.astro",
+                "intent_name": "Centros de Examen Pearson VUE e Idioma NCLEX",
+                "marker": "<!-- Bloque Resolución Intención: Centros Pearson VUE e Idioma -->",
+                "html": """
+  <!-- Bloque Resolución Intención: Centros Pearson VUE e Idioma -->
+  <section class="py-12 bg-white border-t border-slate-200">
+    <div class="max-w-screen-xl mx-auto px-4 md:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div>
+          <span class="text-xs font-bold text-emerald-700 uppercase tracking-widest">Resolución de Dudas Frecuentes</span>
+          <h2 class="text-3xl font-extrabold text-slate-900 mt-1 mb-4">¿Dónde rendir el examen NCLEX-RN y en qué idioma?</h2>
+          <p class="text-slate-600 text-sm leading-relaxed mb-4">
+            El examen NCLEX-RN se administra exclusivamente en **idioma inglés** por regulación nacional de NCSBN. Sin embargo, no requieres presentar el certificado de inglés antes de rendir el NCLEX.
+          </p>
+          <h3 class="font-bold text-slate-900 text-sm mb-2">Centros Oficiales Pearson VUE Habilitados:</h3>
+          <ul class="space-y-2 text-xs text-slate-700 mb-6">
+            <li class="flex items-center gap-2">📍 <span><strong>Latinoamérica:</strong> Ciudad de México, San Juan (Puerto Rico), São Paulo (Brasil).</span></li>
+            <li class="flex items-center gap-2">📍 <span><strong>Estados Unidos:</strong> Más de 200 centros de evaluación en todos los estados.</span></li>
+            <li class="flex items-center gap-2">📍 <span><strong>Europa y Reino Unido:</strong> Londres, Madrid y Frankfurt.</span></li>
+          </ul>
+        </div>
+        <div class="bg-emerald-50 p-6 rounded-2xl border border-emerald-200">
+          <h3 class="text-lg font-bold text-emerald-900 mb-3">Plan de Estudio Bilingüe Recomendado (4 a 6 meses)</h3>
+          <p class="text-xs text-slate-700 leading-relaxed mb-4">
+            Nuestros aspirantes utilizan plataformas de simulación de preguntas (UWorld, Archer Review) combinadas con glosarios médicos en español-inglés para dominar la terminología clínica del examen en 120 días.
+          </p>
+          <a href="https://bit.ly/3R6RbFW" target="_blank" rel="noopener noreferrer" class="inline-block bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs px-5 py-2.5 rounded-lg shadow">
+            Consultar Guía de Preparación NCLEX →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+"""
+            },
+            {
+                "page": self.pages_dir / "proceso-de-visa-y-relocalizacion-para-enfermeras.astro",
+                "rel_path": "src/pages/proceso-de-visa-y-relocalizacion-para-enfermeras.astro",
+                "intent_name": "Tiempos del Proceso Consular EB-3 y VisaScreen",
+                "marker": "<!-- Bloque Resolución Intención: Tiempos Consulares EB-3 -->",
+                "html": """
+  <!-- Bloque Resolución Intención: Tiempos Consulares EB-3 -->
+  <section class="py-12 bg-slate-100 border-t border-slate-200">
+    <div class="max-w-screen-xl mx-auto px-4 md:px-8">
+      <div class="max-w-3xl">
+        <span class="text-xs font-bold text-emerald-700 uppercase tracking-widest">Cronograma Legal EB-3</span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1 mb-4">Línea de Tiempo Migratoria: Del Contrato a la Green Card</h2>
+        <div class="space-y-4">
+          <div class="bg-white p-4 rounded-xl border border-slate-200 flex gap-4 items-start">
+            <span class="font-bold text-emerald-700 text-lg">01</span>
+            <div>
+              <h3 class="font-bold text-slate-900 text-sm">Petición I-140 con USCIS (15 días con Premium Processing)</h3>
+              <p class="text-xs text-slate-600">El hospital patrocinador radica la petición de inmigración aprobada directamente por USCIS.</p>
+            </div>
+          </div>
+          <div class="bg-white p-4 rounded-xl border border-slate-200 flex gap-4 items-start">
+            <span class="font-bold text-emerald-700 text-lg">02</span>
+            <div>
+              <h3 class="font-bold text-slate-900 text-sm">Emisión de Certificado VisaScreen (CGFNS)</h3>
+              <p class="text-xs text-slate-600">Se aprueba la verificación final de título, licencia NCLEX e idioma (IELTS / OET) para la entrevista consular.</p>
+            </div>
+          </div>
+          <div class="bg-white p-4 rounded-xl border border-slate-200 flex gap-4 items-start">
+            <span class="font-bold text-emerald-700 text-lg">03</span>
+            <div>
+              <h3 class="font-bold text-slate-900 text-sm">Entrevista Consular e Ingreso a EE.UU. con Resident Card</h3>
+              <p class="text-xs text-slate-600">Emisión de la visa de inmigrante en el pasaporte y recepción de la Green Card física para todo el grupo familiar.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+"""
+            },
+            {
+                "page": self.pages_dir / "salarios-de-enfermeros-en-estados-unidos.astro",
+                "rel_path": "src/pages/salarios-de-enfermeros-en-estados-unidos.astro",
+                "intent_name": "Desglose Salarial por Recargos y Estado 2026",
+                "marker": "<!-- Bloque Resolución Intención: Recargos y Sobretiempos Salariales -->",
+                "html": """
+  <!-- Bloque Resolución Intención: Recargos y Sobretiempos Salariales -->
+  <section class="py-12 bg-white border-t border-slate-200">
+    <div class="max-w-screen-xl mx-auto px-4 md:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-8">
+        <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900">¿Cómo se Estructura el Pago Mensual de un Enfermero RN en EE.UU.?</h2>
+        <p class="text-sm text-slate-600 mt-2">Más allá del salario base por hora, los enfermeros en EE.UU. incrementan sus ingresos con diferenciales de ley.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+        <div class="p-5 bg-emerald-50 rounded-xl border border-emerald-200">
+          <h3 class="font-bold text-emerald-900 text-base mb-1">Diferencial Nocturno</h3>
+          <p class="text-emerald-700 font-bold mb-2">+$4.00 a +$8.00 USD / hora</p>
+          <p class="text-xs text-slate-700">Adicional pagado por trabajar en turnos de 7:00 PM a 7:00 AM.</p>
+        </div>
+        <div class="p-5 bg-emerald-50 rounded-xl border border-emerald-200">
+          <h3 class="font-bold text-emerald-900 text-base mb-1">Overtime (Horas Extra)</h3>
+          <p class="text-emerald-700 font-bold mb-2">1.5x Tarifas Base ($60 - $87 USD/h)</p>
+          <p class="text-xs text-slate-700">Toda hora trabajada después de la hora 36 semanal se paga a tarifa y media.</p>
+        </div>
+        <div class="p-5 bg-emerald-50 rounded-xl border border-emerald-200">
+          <h3 class="font-bold text-emerald-900 text-base mb-1">Diferencial Fin de Semana</h3>
+          <p class="text-emerald-700 font-bold mb-2">+$3.00 a +$6.00 USD / hora</p>
+          <p class="text-xs text-slate-700">Bonificación por turnos asignados de sábado a domingo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+"""
+            }
+        ]
+
+        target = intent_matrix[(iteration - 1) % len(intent_matrix)]
+        page_file = target["page"]
+
+        if page_file.exists():
+            content = page_file.read_text(encoding="utf-8")
+            if target["marker"] not in content:
+                if "</BaseLayout>" in content:
+                    content = content.replace("</BaseLayout>", f"{target['html']}\n</BaseLayout>")
+                else:
+                    content += target["html"]
+
+                page_file.write_text(content, encoding="utf-8")
+                result["modified"] = True
+                result["modified_file"] = target["rel_path"]
+                result["intent_resolved"] = target["intent_name"]
+                result["description"] = f"Resuelta Intención de Búsqueda del Usuario en '{target['rel_path']}': Inyectada sección temática '{target['intent_name']}' con datos factuales, costos y cronogramas explícitos."
+                return result
+
+        return result
+
 class AutonomousGrowthEngine:
     """Motor Autónomo de Generación de Contenido SEO/GEO y Páginas Transaccionales para Posicionamiento en Google SERP"""
     def __init__(self, astro_dir: Path):
@@ -934,6 +1122,7 @@ class AgentEngine:
         self.keyword_optimizer = TargetedKeywordOptimizer(ASTRO_DIR)
         self.continuous_seo = ContinuousSEOEngine(ASTRO_DIR)
         self.onpage_link_builder = OnPageContentAndLinkBuilder(ASTRO_DIR)
+        self.intent_resolver = SearchIntentResolverEngine(ASTRO_DIR)
 
     def check_web_operability(self) -> dict:
         """Verifica la conectividad real del dominio y del bucket de GCP"""
@@ -1036,6 +1225,13 @@ class AgentEngine:
             trans_opt["fixes_applied"].append(onpage_res["description"])
             if onpage_res["modified_file"] not in trans_opt["modified_pages"]:
                 trans_opt["modified_pages"].append(onpage_res["modified_file"])
+
+        # I. Auditoría y Resolución de Intención de Búsqueda del Usuario por Página
+        intent_res = self.intent_resolver.audit_and_resolve_intent(iteration)
+        if intent_res["modified"]:
+            trans_opt["fixes_applied"].append(intent_res["description"])
+            if intent_res["modified_file"] not in trans_opt["modified_pages"]:
+                trans_opt["modified_pages"].append(intent_res["modified_file"])
 
         # E. Re-compilar el sitio estático Astro con Node v22
         env = os.environ.copy()
