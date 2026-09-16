@@ -21,7 +21,7 @@ if __name__ == "__main__":
     print("=" * 65)
     print(" 🚀 AGENTE AUTÓNOMO ANTIGRAVITY INICIADO")
     print(f" 🌐 Dashboard Web en vivo: http://localhost:{PORT}")
-    print(" ⏱️  Intervalo de ejecución: Cada 5 minutos (300 segundos)")
+    print(" ⏱️  Intervalo de ejecución: Cada 2 horas (7200 segundos)")
     print(" ⚡ Cero dependencias externas requeridas")
     print("=" * 65)
 

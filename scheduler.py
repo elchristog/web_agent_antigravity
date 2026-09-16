@@ -19,7 +19,7 @@ class AgentScheduler:
             return
         self.is_running = True
         self.task = asyncio.create_task(self._loop())
-        logger.info("Scheduler de 5 minutos iniciado.")
+        logger.info("Scheduler de 2 horas (7200s) iniciado.")
 
     async def stop(self):
         self.is_running = False

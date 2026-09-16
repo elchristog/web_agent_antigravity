@@ -20,7 +20,7 @@ load_env_file(BASE_DIR / ".env")
 
 # Ruta al binario oficial de Google Antigravity en el sistema
 ANTIGRAVITY_BIN = os.environ.get("ANTIGRAVITY_BIN", "/usr/bin/antigravity")
-DEFAULT_INTERVAL_SECONDS = int(os.environ.get("INTERVAL_SECONDS", "300"))
+DEFAULT_INTERVAL_SECONDS = int(os.environ.get("INTERVAL_SECONDS", "7200"))
 PORT = int(os.environ.get("PORT", "8000"))
 HOST = os.environ.get("HOST", "0.0.0.0")
 
