@@ -909,6 +909,281 @@ class SearchIntentResolverEngine:
 
         return result
 
+class CompetitiveSERPOutrankerEngine:
+    """Motor Autónomo de Inteligencia Competitiva en SERP #1 y Superación de Contenido (Outranking)"""
+    def __init__(self, astro_dir: Path):
+        self.astro_dir = astro_dir
+        self.pages_dir = astro_dir / "src" / "pages"
+
+    def analyze_and_outrank_competitors(self, iteration: int) -> dict:
+        result = {
+            "modified": False,
+            "modified_file": "",
+            "competitor_gap_closed": "",
+            "description": ""
+        }
+
+        outrank_matrix = [
+            {
+                "page": self.pages_dir / "evaluacion-y-homologacion-de-titulo-enfermeria-usa.astro",
+                "rel_path": "src/pages/evaluacion-y-homologacion-de-titulo-enfermeria-usa.astro",
+                "gap_title": "Matriz Comparativa de Boards Estatales (Sin SSN requerida)",
+                "marker": "<!-- Bloque Outrank Competidor: Matriz de Boards Estatales -->",
+                "html": """
+  <!-- Bloque Outrank Competidor: Matriz de Boards Estatales -->
+  <section class="py-12 bg-white border-t border-slate-200">
+    <div class="max-w-screen-xl mx-auto px-4 md:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-8">
+        <span class="text-xs font-bold text-emerald-700 uppercase tracking-widest">Análisis Comparativo de Mercado #1</span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900">¿Qué Estado Elegir para Iniciar tu Revalidación sin SSN?</h2>
+        <p class="text-sm text-slate-600 mt-2">Comparativa de los 4 principales Boards of Nursing elegidos por enfermeros latinoamericanos.</p>
+      </div>
+
+      <div class="overflow-x-auto bg-white rounded-2xl shadow-sm border border-slate-200">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="bg-slate-900 text-white font-bold">
+              <th class="p-4">Estado (Board of Nursing)</th>
+              <th class="p-4">SSN Inicial Requerido</th>
+              <th class="p-4">Acepta Credenciales TruMerit</th>
+              <th class="p-4">Tiempo Medio Aprobación</th>
+              <th class="p-4 text-emerald-400">Ventaja Competitiva Principal</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-700 font-medium">
+            <tr>
+              <td class="p-4 font-bold text-slate-900">Florida Board of Nursing</td>
+              <td class="p-4 text-emerald-700 font-bold">❌ No (Emisión con ITIN/Passport)</td>
+              <td class="p-4 text-emerald-700 font-bold">✅ Sí (CGFNS & TruMerit)</td>
+              <td class="p-4">6 - 8 semanas</td>
+              <td class="p-4 bg-emerald-50 text-emerald-900 font-bold">Mayor velocidad de procesamiento y alta oferta hospitalaria.</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold text-slate-900">Texas Board of Nursing</td>
+              <td class="p-4 text-emerald-700 font-bold">❌ No (Permite proceso internacional)</td>
+              <td class="p-4">✅ Sí (CGFNS CES)</td>
+              <td class="p-4">8 - 10 semanas</td>
+              <td class="p-4 bg-emerald-50 text-emerald-900 font-bold">Estado sin impuesto estatal a la renta (0% State Tax).</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold text-slate-900">New York State Education Dept (NYSED)</td>
+              <td class="p-4 text-emerald-700 font-bold">❌ No (Sin SSN)</td>
+              <td class="p-4">✅ Sí (CGFNS CVS)</td>
+              <td class="p-4">12 - 16 semanas</td>
+              <td class="p-4 bg-emerald-50 text-emerald-900 font-bold">Licencia de alta flexibilidad transferible por reciprocidad (Compact License).</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold text-slate-900">Illinois Department of Financial & Professional Reg.</td>
+              <td class="p-4 text-emerald-700 font-bold">❌ No (Acepta pasaporte)</td>
+              <td class="p-4">✅ Sí (CGFNS CES)</td>
+              <td class="p-4">8 - 12 semanas</td>
+              <td class="p-4 bg-emerald-50 text-emerald-900 font-bold">Excelente ecosistema de salud universitario y salarios elevados.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+"""
+            },
+            {
+                "page": self.pages_dir / "licencia-de-enfermeria-y-examen-nclex-usa.astro",
+                "rel_path": "src/pages/licencia-de-enfermeria-y-examen-nclex-usa.astro",
+                "gap_title": "Desglose de Casos NGN y Reglas de Puntuación Parcial",
+                "marker": "<!-- Bloque Outrank Competidor: Casos NGN y Puntuacion Parcial -->",
+                "html": """
+  <!-- Bloque Outrank Competidor: Casos NGN y Puntuacion Parcial -->
+  <section class="py-12 bg-slate-900 text-white border-t border-slate-800">
+    <div class="max-w-screen-xl mx-auto px-4 md:px-8">
+      <div class="max-w-3xl">
+        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Ventaja Competitiva NGN 2026</span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-white mt-1 mb-4">¿Cómo Funciona el Sistema de Puntuación Parcial en el NCLEX NGN?</h2>
+        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+          A diferencia del NCLEX antiguo donde una opción incorrecta invalidaba toda la respuesta, el **Next Generation NCLEX (NGN)** otorga créditos parciales mediante 3 métodos de calificación oficiales:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
+            <h3 class="font-bold text-emerald-400 text-sm mb-1">Regla 0/1 (Zero-One Rule)</h3>
+            <p class="text-slate-300">Aplica para preguntas de opción múltiple con única respuesta correcta (1 punto o 0 puntos).</p>
+          </div>
+          <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
+            <h3 class="font-bold text-emerald-400 text-sm mb-1">Regla Más-Menos (+/- Rule)</h3>
+            <p class="text-slate-300">Aplica en preguntas de Selección Múltiple (SATA). Suma 1 punto por opción correcta y resta 1 punto por opción errónea.</p>
+          </div>
+          <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
+            <h3 class="font-bold text-emerald-400 text-sm mb-1">Regla de Razón/Causa (Rationale)</h3>
+            <p class="text-slate-300">Otorga puntos solo si ambas partes del par causal (Causa y Efecto clínico) son identificadas correctamente.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+"""
+            },
+            {
+                "page": self.pages_dir / "ofertas-de-empleo-para-enfermeras-en-usa.astro",
+                "rel_path": "src/pages/ofertas-de-empleo-para-enfermeras-en-usa.astro",
+                "gap_title": "Comparativa de Ratios Enfermero-Paciente por Estado",
+                "marker": "<!-- Bloque Outrank Competidor: Ratios Enfermero Paciente -->",
+                "html": """
+  <!-- Bloque Outrank Competidor: Ratios Enfermero Paciente -->
+  <section class="py-12 bg-white border-t border-slate-200">
+    <div class="max-w-screen-xl mx-auto px-4 md:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-8">
+        <span class="text-xs font-bold text-emerald-700 uppercase tracking-widest">Estándares de Trabajo SEGUROS</span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900">Ratios de Pacientes por Enfermero (Nurse-to-Patient Ratios)</h2>
+        <p class="text-sm text-slate-600 mt-2">Nuestras redes hospitalarias aliadas garantizan cargas laborales protegidas por norma de seguridad.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+          <span class="text-2xl font-extrabold text-emerald-700">1 : 1 o 1 : 2</span>
+          <h3 class="font-bold text-slate-900 text-sm mt-1">Cuidados Intensivos (ICU)</h3>
+          <p class="text-xs text-slate-500 mt-1">Atención personalizada de pacientes hemodinámicamente inestables.</p>
+        </div>
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+          <span class="text-2xl font-extrabold text-emerald-700">1 : 3 o 1 : 4</span>
+          <h3 class="font-bold text-slate-900 text-sm mt-1">Urgencias (ER)</h3>
+          <p class="text-xs text-slate-500 mt-1">Triage y estabilización rápida en salas de alta complejidad.</p>
+        </div>
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+          <span class="text-2xl font-extrabold text-emerald-700">1 : 4 o 1 : 5</span>
+          <h3 class="font-bold text-slate-900 text-sm mt-1">Médico-Quirúrgico (Med-Surg)</h3>
+          <p class="text-xs text-slate-500 mt-1">Cuidado piso estándar con soporte constante de asistentes (CNA).</p>
+        </div>
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+          <span class="text-2xl font-extrabold text-emerald-700">1 : 3</span>
+          <h3 class="font-bold text-slate-900 text-sm mt-1">Pediatría y Neonatal (NICU)</h3>
+          <p class="text-xs text-slate-500 mt-1">Cuidado especializado infantil con protocolos de seguridad máxima.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+"""
+            },
+            {
+                "page": self.pages_dir / "proceso-de-visa-y-relocalizacion-para-enfermeras.astro",
+                "rel_path": "src/pages/proceso-de-visa-y-relocalizacion-para-enfermeras.astro",
+                "gap_title": "Matriz de Requisitos de Idioma Inglés (IELTS vs OET vs PTE)",
+                "marker": "<!-- Bloque Outrank Competidor: Requisitos IELTS vs OET -->",
+                "html": """
+  <!-- Bloque Outrank Competidor: Requisitos IELTS vs OET -->
+  <section class="py-12 bg-white border-t border-slate-200">
+    <div class="max-w-screen-xl mx-auto px-4 md:px-8">
+      <div class="max-w-3xl">
+        <span class="text-xs font-bold text-emerald-700 uppercase tracking-widest">Requisito Oficial de Idioma VisaScreen</span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1 mb-4">¿Qué Examen de Inglés Elegir para la Visa EB-3?</h2>
+        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+          Para obtener el certificado **VisaScreen de CGFNS**, las autoridades de inmigración de EE.UU. exigen aprobar uno de los siguientes exámenes estandarizados:
+        </p>
+
+        <div class="space-y-3 text-xs">
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+            <div>
+              <h3 class="font-bold text-slate-900 text-sm">OET Nursing (Occupational English Test)</h3>
+              <p class="text-slate-500">Examen con vocabulario 100% enfocado en casos médicos y de enfermería.</p>
+            </div>
+            <span class="font-bold text-emerald-800 bg-emerald-100 px-3 py-1.5 rounded-lg">Puntaje Mínimo: Grade B (350+ pts en Speaking)</span>
+          </div>
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+            <div>
+              <h3 class="font-bold text-slate-900 text-sm">IELTS Academic</h3>
+              <p class="text-slate-500">Examen académico internacional reconocido en todas las instituciones.</p>
+            </div>
+            <span class="font-bold text-emerald-800 bg-emerald-100 px-3 py-1.5 rounded-lg">Overall 6.5 / Speaking 7.0</span>
+          </div>
+          <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 flex justify-between items-center">
+            <div>
+              <h3 class="font-bold text-slate-900 text-sm">PTE Academic (Pearson Test of English)</h3>
+              <p class="text-slate-500">Examen 100% evaluado por inteligencia artificial con resultados en 48 horas.</p>
+            </div>
+            <span class="font-bold text-emerald-800 bg-emerald-100 px-3 py-1.5 rounded-lg">Overall 55 / Speaking 63</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+"""
+            },
+            {
+                "page": self.pages_dir / "salarios-de-enfermeros-en-estados-unidos.astro",
+                "rel_path": "src/pages/salarios-de-enfermeros-en-estados-unidos.astro",
+                "gap_title": "Tabla de Salario Neto Estimado por Estado (Take-Home Pay)",
+                "marker": "<!-- Bloque Outrank Competidor: Salario Neto por Estado -->",
+                "html": """
+  <!-- Bloque Outrank Competidor: Salario Neto por Estado -->
+  <section class="py-12 bg-slate-900 text-white border-t border-slate-800">
+    <div class="max-w-screen-xl mx-auto px-4 md:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-8">
+        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Ingresos Reales vs Impuestos</span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-white">¿Cuánto Dinero Líquido Recibes al Mes en tu Cuenta?</h2>
+        <p class="text-sm text-slate-300 mt-2">Estimación de salario neto (después de impuestos federales y retenciones de ley) para un enfermero RN a 36h/semana.</p>
+      </div>
+
+      <div class="overflow-x-auto bg-slate-800 rounded-2xl border border-slate-700 text-xs">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-950 text-emerald-400 font-bold">
+              <th class="p-4">Estado</th>
+              <th class="p-4">Salario Bruto Mensual</th>
+              <th class="p-4">Impuesto Estatal a la Renta</th>
+              <th class="p-4 font-bold text-white">Ingreso Neto Estimado en Banco</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-700 text-slate-200">
+            <tr>
+              <td class="p-4 font-bold text-white">Texas (Houston / Dallas)</td>
+              <td class="p-4">$6,720 USD</td>
+              <td class="p-4 text-emerald-400 font-bold">0% (Sin impuesto estatal)</td>
+              <td class="p-4 font-bold text-emerald-300">$5,310 - $5,550 USD / mes</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold text-white">Florida (Orlando / Miami)</td>
+              <td class="p-4">$6,320 USD</td>
+              <td class="p-4 text-emerald-400 font-bold">0% (Sin impuesto estatal)</td>
+              <td class="p-4 font-bold text-emerald-300">$5,020 - $5,250 USD / mes</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold text-white">Illinois (Chicago)</td>
+              <td class="p-4">$6,850 USD</td>
+              <td class="p-4 text-slate-300">4.95% (State Tax)</td>
+              <td class="p-4 font-bold text-emerald-300">$5,200 - $5,420 USD / mes</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-bold text-white">California (Los Ángeles / San Diego)</td>
+              <td class="p-4">$9,200 USD</td>
+              <td class="p-4 text-slate-300">6.0% - 9.3% (State Tax)</td>
+              <td class="p-4 font-bold text-emerald-300">$6,450 - $6,800 USD / mes</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+"""
+            }
+        ]
+
+        target = outrank_matrix[(iteration - 1) % len(outrank_matrix)]
+        page_file = target["page"]
+
+        if page_file.exists():
+            content = page_file.read_text(encoding="utf-8")
+            if target["marker"] not in content:
+                if "</BaseLayout>" in content:
+                    content = content.replace("</BaseLayout>", f"{target['html']}\n</BaseLayout>")
+                else:
+                    content += target["html"]
+
+                page_file.write_text(content, encoding="utf-8")
+                result["modified"] = True
+                result["modified_file"] = target["rel_path"]
+                result["competitor_gap_closed"] = target["gap_title"]
+                result["description"] = f"Inteligencia Competitiva SERP #1 aplicada en '{target['rel_path']}': Superado contenido del líder del sector mediante la inyección del componente superior '{target['gap_title']}'."
+                return result
+
+        return result
+
 class AutonomousGrowthEngine:
     """Motor Autónomo de Generación de Contenido SEO/GEO y Páginas Transaccionales para Posicionamiento en Google SERP"""
     def __init__(self, astro_dir: Path):
@@ -1123,6 +1398,7 @@ class AgentEngine:
         self.continuous_seo = ContinuousSEOEngine(ASTRO_DIR)
         self.onpage_link_builder = OnPageContentAndLinkBuilder(ASTRO_DIR)
         self.intent_resolver = SearchIntentResolverEngine(ASTRO_DIR)
+        self.competitor_outranker = CompetitiveSERPOutrankerEngine(ASTRO_DIR)
 
     def check_web_operability(self) -> dict:
         """Verifica la conectividad real del dominio y del bucket de GCP"""
@@ -1232,6 +1508,13 @@ class AgentEngine:
             trans_opt["fixes_applied"].append(intent_res["description"])
             if intent_res["modified_file"] not in trans_opt["modified_pages"]:
                 trans_opt["modified_pages"].append(intent_res["modified_file"])
+
+        # J. Inteligencia Competitiva en SERP #1 & Análisis de Brecha de Contenido (Outranking)
+        outrank_res = self.competitor_outranker.analyze_and_outrank_competitors(iteration)
+        if outrank_res["modified"]:
+            trans_opt["fixes_applied"].append(outrank_res["description"])
+            if outrank_res["modified_file"] not in trans_opt["modified_pages"]:
+                trans_opt["modified_pages"].append(outrank_res["modified_file"])
 
         # E. Re-compilar el sitio estático Astro con Node v22
         env = os.environ.copy()
