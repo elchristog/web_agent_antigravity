@@ -30,9 +30,9 @@ python3 agent_manager.py create nombre_proyecto tudominio.com
 
 **Ejemplo:**
 ```bash
-python3 agent_manager.py create clinica_dental clinicadental.com
+python3 agent_manager.py create colombia enfermerascolombiausa.com
 ```
-*Esto creará la carpeta `/home/elchristog/agente_clinica_dental` configurada para `clinicadental.com`.*
+*Esto creará la carpeta `/home/elchristog/agente_colombia` configurada para `enfermerascolombiausa.com`.*
 
 ---
 
@@ -45,7 +45,7 @@ python3 agent_manager.py start nombre_proyecto
 
 **Ejemplo:**
 ```bash
-python3 agent_manager.py start clinica_dental
+python3 agent_manager.py start colombia
 ```
 
 ---
@@ -56,6 +56,16 @@ Para detener la ejecución continua de un agente en la máquina:
 ```bash
 python3 agent_manager.py stop nombre_proyecto
 ```
+
+---
+
+## 🌐 Linkbuilding Cruzado Automático entre Sitios Espejo (Multi-Agent PBN Network)
+
+Todos los agentes creados en la misma máquina se detectan e interconectan automáticamente mediante el archivo de registro central (`/home/elchristog/agents_network.json`):
+
+1. **Registro Automático:** Cada vez que ejecutas `agent_manager.py create` o `status`, el sistema registra todos los dominios activos de la máquina.
+2. **Inyección Dinámica de Backlinks:** En cada ciclo de ejecución, el motor `NetworkCrossLinkbuilderEngine` de cada agente lee el registro e inyecta en el pie de página (`Footer.astro`) de su sitio web el bloque **"🌐 Red Oficial de Portales Especializados en Enfermería USA"**.
+3. **Transferencia de Autoridad de Dominio:** Todos los sitios de la red quedan enlazados entre sí automáticamente, multiplicando el flujo de PageRank y el enlazado recíproco sin necesidad de intervención manual.
 
 ---
 
