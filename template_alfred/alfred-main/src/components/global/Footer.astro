@@ -19,10 +19,13 @@ const footerLinks = [
     ],
   },
   {
-    title: "Contacto & Asesoría",
+    title: "Redes Oficiales & Contacto",
     links: [
-      { href: "https://bit.ly/3R6RbFW", label: "Agendar Sesión Informativa" },
-      { href: "https://www.instagram.com/enfermeraenestadosunidos", label: "Instagram Oficial" },
+      { href: "mailto:hello@enfermeraenestadosunidos.com", label: "✉️ hello@enfermeraenestadosunidos.com" },
+      { href: "https://www.instagram.com/enfermeraenestadosunidos", label: "📸 Instagram Oficial", external: true },
+      { href: "https://www.facebook.com/enfermeraenestadosunidosusa", label: "👍 Facebook Oficial", external: true },
+      { href: "https://www.youtube.com/@enfermeraenestadosunidos", label: "▶️ YouTube Oficial", external: true },
+      { href: "https://www.tiktok.com/@enfermeraenestadosunidos", label: "🎵 TikTok Oficial", external: true },
     ],
   },
 ];
@@ -38,6 +41,12 @@ const footerLinks = [
         <p class="text-gray-400 text-sm leading-relaxed mb-4">
           La agencia #1 para enfermeros hispanos. Te acompañamos desde la homologación de tu título hasta tu contrato en los mejores hospitales de Estados Unidos.
         </p>
+        <div class="flex items-center gap-3 mb-4">
+          <a href="https://www.instagram.com/enfermeraenestadosunidos" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-gray-800 hover:bg-emerald-600 flex items-center justify-center text-xs transition" title="Instagram">📸</a>
+          <a href="https://www.facebook.com/enfermeraenestadosunidosusa" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-gray-800 hover:bg-emerald-600 flex items-center justify-center text-xs transition" title="Facebook">👍</a>
+          <a href="https://www.youtube.com/@enfermeraenestadosunidos" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-gray-800 hover:bg-emerald-600 flex items-center justify-center text-xs transition" title="YouTube">▶️</a>
+          <a href="https://www.tiktok.com/@enfermeraenestadosunidos" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-gray-800 hover:bg-emerald-600 flex items-center justify-center text-xs transition" title="TikTok">🎵</a>
+        </div>
         <a
           href="https://bit.ly/3R6RbFW"
           target="_blank"
@@ -54,7 +63,12 @@ const footerLinks = [
           <ul class="space-y-2 text-sm">
             {col.links.map((link) => (
               <li>
-                <a href={link.href} class="text-gray-400 hover:text-emerald-400 transition-colors">
+                <a
+                  href={link.href}
+                  target={link.external ? "_blank" : "_self"}
+                  rel={link.external ? "noopener noreferrer" : ""}
+                  class="text-gray-400 hover:text-emerald-400 transition-colors"
+                >
                   {link.label}
                 </a>
               </li>
@@ -69,7 +83,7 @@ const footerLinks = [
       <div class="flex gap-4">
         <a href="/" class="hover:text-gray-300">Inicio</a>
         <a href="/blog/home/" class="hover:text-gray-300">Blog</a>
-        <a href="https://bit.ly/3R6RbFW" class="hover:text-gray-300">Contacto</a>
+        <a href="mailto:hello@enfermeraenestadosunidos.com" class="hover:text-gray-300">hello@enfermeraenestadosunidos.com</a>
       </div>
     </div>
   </div>
