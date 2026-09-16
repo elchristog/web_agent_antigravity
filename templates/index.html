@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antigravity Agent - Panel de Control Autónomo</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-primary: #090d16;
+            --bg-card: rgba(18, 24, 38, 0.75);
+            --bg-card-hover: rgba(26, 35, 54, 0.85);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --accent-glow: rgba(99, 102, 241, 0.15);
+            --primary: #6366f1;
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --secondary-gradient: linear-gradient(135deg, #3b82f6 0%, #2dd4bf 100%);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --font-main: 'Outfit', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(45, 212, 191, 0.06) 0%, transparent 40%);
+            background-attachment: fixed;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            padding: 20px 28px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.37);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .brand-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+            animation: pulse-glow 3s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 15px rgba(99, 102, 241, 0.3); }
+            100% { box-shadow: 0 0 25px rgba(139, 92, 246, 0.6); }
+        }
+
+        .brand-text h1 {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-text p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .status-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .status-pill.paused {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: currentColor;
+            box-shadow: 0 0 8px currentColor;
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .card:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .card-title {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-icon {
+            font-size: 18px;
+            color: var(--primary);
+        }
+
+        .metric-value {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .metric-subtext {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 10px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 10px;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Main Content Layout */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 1024px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-family: var(--font-main);
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 12px rgba(99, 102, 241, 0.25);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: var(--danger);
+        }
+
+        .btn-danger:hover {
+            background: rgba(239, 68, 68, 0.25);
+        }
+
+        /* Log Console */
+        .console-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-height: 500px;
+        }
+
+        .console-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 16px;
+        }
+
+        .console-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .console-body {
+            flex: 1;
+            background: #050811;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 16px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            overflow-y: auto;
+            max-height: 520px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .log-entry {
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 3px solid var(--primary);
+            padding: 12px;
+            border-radius: 0 8px 8px 0;
+            line-height: 1.5;
+        }
+
+        .log-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 11px;
+            margin-bottom: 6px;
+        }
+
+        .log-thought {
+            color: #a7f3d0;
+            margin-bottom: 4px;
+        }
+
+        .log-action {
+            color: #93c5fd;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .log-detail {
+            color: #cbd5e1;
+            white-space: pre-wrap;
+            font-size: 12px;
+        }
+
+        .countdown-badge {
+            font-family: var(--font-mono);
+            color: #2dd4bf;
+            font-size: 28px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>Agente Autónomo Antigravity</h1>
+                    <p>Bucle de ejecución continua (cada 5 minutos)</p>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <div id="statusPill" class="status-pill">
+                    <div class="status-dot"></div>
+                    <span id="statusText">Corriendo</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Metric Cards -->
+        <div class="metrics-grid">
+            <!-- KPI Progress -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Progreso KPI</span>
+                    <i class="fa-solid fa-chart-line card-icon"></i>
+                </div>
+                <div class="metric-value">
+                    <span id="kpiCurrentVal">0</span>
+                    <span class="metric-subtext">/ <span id="kpiTargetVal">100</span> <span id="kpiUnit">%</span></span>
+                </div>
+                <div id="kpiTitleText" class="metric-subtext">Progreso General</div>
+                <div class="progress-container">
+                    <div id="progressBar" class="progress-bar" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- Iterations Count -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Ciclos Ejecutados</span>
+                    <i class="fa-solid fa-arrows-rotate card-icon"></i>
+                </div>
+                <div class="metric-value">
+                    <span id="iterationCount">0</span>
+                </div>
+                <div class="metric-subtext">Última ejecución: <span id="lastRunText">Nunca</span></div>
+            </div>
+
+            <!-- Next Run Timer -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Próxima Ejecución</span>
+                    <i class="fa-solid fa-stopwatch card-icon"></i>
+                </div>
+                <div class="metric-value">
+                    <span id="countdownTimer" class="countdown-badge">05:00</span>
+                </div>
+                <div class="metric-subtext">Intervalo: <span id="intervalSecText">300</span>s (5 min)</div>
+            </div>
+        </div>
+
+        <!-- Main Layout -->
+        <div class="main-layout">
+            <!-- Left Column: Config Panel -->
+            <div class="card">
+                <h3 style="margin-bottom: 20px; font-size: 18px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-sliders" style="color: var(--primary);"></i> Configuración del Agente
+                </h3>
+
+                <form id="configForm">
+                    <div class="form-group">
+                        <label for="kpiTitle">Objetivo / Título del KPI</label>
+                        <input type="text" id="kpiTitle" class="form-control" placeholder="Ej: Redacción de documentación">
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label for="kpiCurrent">Valor Actual</label>
+                            <input type="number" step="any" id="kpiCurrent" class="form-control" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="kpiTarget">Valor Objetivo</label>
+                            <input type="number" step="any" id="kpiTarget" class="form-control" placeholder="100">
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label for="kpiUnit">Unidad de Medida</label>
+                            <input type="text" id="kpiUnit" class="form-control" placeholder="%, tareas, etc.">
+                        </div>
+                        <div class="form-group">
+                            <label for="intervalSec">Intervalo (Segundos)</label>
+                            <input type="number" id="intervalSec" class="form-control" placeholder="300">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="instructions">Instrucciones del Agente</label>
+                        <textarea id="instructions" class="form-control" placeholder="Describe qué debe hacer el agente en cada ciclo..."></textarea>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa-solid fa-floppy-disk"></i> Guardar Cambios
+                        </button>
+                        <button type="button" id="btnRunNow" class="btn btn-secondary">
+                            <i class="fa-solid fa-play"></i> Ejecutar Ahora
+                        </button>
+                        <button type="button" id="btnPauseResume" class="btn btn-secondary">
+                            <i class="fa-solid fa-pause"></i> Pausar
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Right Column: Live Console -->
+            <div class="card console-card">
+                <div class="console-header">
+                    <div class="console-title">
+                        <i class="fa-solid fa-terminal" style="color: #2dd4bf;"></i> Historial & Console Logs
+                    </div>
+                    <button id="btnClearLogs" class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">
+                        <i class="fa-solid fa-trash"></i> Limpiar
+                    </button>
+                </div>
+
+                <div id="consoleBody" class="console-body">
+                    <div class="log-entry">
+                        <div class="log-meta">
+                            <span>SISTEMA</span>
+                            <span>Ahora</span>
+                        </div>
+                        <div class="log-action">Esperando primera sincronización...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentState = null;
+        let countdownInterval = null;
+        let targetNextRunTimestamp = null;
+
+        async function fetchState() {
+            try {
+                const res = await fetch('/api/state');
+                const data = await res.json();
+                currentState = data;
+                updateUI(data);
+            } catch (err) {
+                console.error('Error obteniendo el estado:', err);
+            }
+        }
+
+        function updateUI(state) {
+            // Update Header Status
+            const statusPill = document.getElementById('statusPill');
+            const statusText = document.getElementById('statusText');
+            const btnPause = document.getElementById('btnPauseResume');
+
+            if (state.status === 'paused') {
+                statusPill.className = 'status-pill paused';
+                statusText.innerText = 'Pausado';
+                btnPause.innerHTML = '<i class="fa-solid fa-play"></i> Reanudar';
+            } else {
+                statusPill.className = 'status-pill';
+                statusText.innerText = 'Activo';
+                btnPause.innerHTML = '<i class="fa-solid fa-pause"></i> Pausar';
+            }
+
+            // Update KPI Metrics
+            const kpi = state.kpi || {};
+            const current = kpi.current_value || 0;
+            const target = kpi.target_value || 100;
+            const unit = kpi.unit || '%';
+            
+            document.getElementById('kpiCurrentVal').innerText = current;
+            document.getElementById('kpiTargetVal').innerText = target;
+            document.getElementById('kpiUnit').innerText = unit;
+            document.getElementById('kpiTitleText').innerText = kpi.title || 'Progreso General';
+
+            const pct = target > 0 ? Math.min(100, Math.round((current / target) * 100)) : 0;
+            document.getElementById('progressBar').style.width = pct + '%';
+
+            // Iterations & Timing
+            document.getElementById('iterationCount').innerText = state.iteration_count || 0;
+            document.getElementById('lastRunText').innerText = state.last_run || 'Nunca';
+            document.getElementById('intervalSecText').innerText = state.interval_seconds || 300;
+
+            // Fill Form if not focused
+            if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+                document.getElementById('kpiTitle').value = kpi.title || '';
+                document.getElementById('kpiCurrent').value = current;
+                document.getElementById('kpiTarget').value = target;
+                document.getElementById('kpiUnit').value = unit;
+                document.getElementById('intervalSec').value = state.interval_seconds || 300;
+                document.getElementById('instructions').value = state.instructions || '';
+            }
+
+            // Logs
+            renderLogs(state.history || []);
+
+            // Setup Next Run Countdown
+            if (state.next_run) {
+                targetNextRunTimestamp = new Date(state.next_run).getTime();
+            } else {
+                targetNextRunTimestamp = Date.now() + (state.interval_seconds || 300) * 1000;
+            }
+        }
+
+        function startCountdown() {
+            if (countdownInterval) clearInterval(countdownInterval);
+            countdownInterval = setInterval(() => {
+                if (!targetNextRunTimestamp || (currentState && currentState.status === 'paused')) {
+                    document.getElementById('countdownTimer').innerText = 'PAUSADO';
+                    return;
+                }
+                const now = Date.now();
+                const diff = Math.max(0, Math.floor((targetNextRunTimestamp - now) / 1000));
+                const mins = String(Math.floor(diff / 60)).padStart(2, '0');
+                const secs = String(diff % 60).padStart(2, '0');
+                document.getElementById('countdownTimer').innerText = `${mins}:${secs}`;
+
+                if (diff === 0) {
+                    setTimeout(fetchState, 2000);
+                }
+            }, 1000);
+        }
+
+        function renderLogs(history) {
+            const consoleBody = document.getElementById('consoleBody');
+            if (!history || history.length === 0) {
+                consoleBody.innerHTML = '<div class="log-entry"><div class="log-action">No hay ciclos registrados aún.</div></div>';
+                return;
+            }
+
+            consoleBody.innerHTML = history.map(item => `
+                <div class="log-entry">
+                    <div class="log-meta">
+                        <span>CICLO #${item.iteration}</span>
+                        <span>${item.timestamp}</span>
+                    </div>
+                    ${item.thought ? `<div class="log-thought">🧠 <strong>Pensamiento:</strong> ${escapeHtml(item.thought)}</div>` : ''}
+                    ${item.action ? `<div class="log-action">⚡ <strong>Acción:</strong> ${escapeHtml(item.action)}</div>` : ''}
+                    ${item.log ? `<div class="log-detail">${escapeHtml(item.log)}</div>` : ''}
+                </div>
+            `).join('');
+        }
+
+        function escapeHtml(text) {
+            return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        // Event Listeners
+        document.getElementById('configForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const payload = {
+                kpi_title: document.getElementById('kpiTitle').value,
+                current_value: parseFloat(document.getElementById('kpiCurrent').value),
+                target_value: parseFloat(document.getElementById('kpiTarget').value),
+                unit: document.getElementById('kpiUnit').value,
+                interval_seconds: parseInt(document.getElementById('intervalSec').value),
+                instructions: document.getElementById('instructions').value
+            };
+
+            await fetch('/api/config', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            fetchState();
+        });
+
+        document.getElementById('btnRunNow').addEventListener('click', async () => {
+            await fetch('/api/control/run-now', { method: 'POST' });
+            setTimeout(fetchState, 1500);
+        });
+
+        document.getElementById('btnPauseResume').addEventListener('click', async () => {
+            const isPaused = currentState && currentState.status === 'paused';
+            const endpoint = isPaused ? '/api/control/resume' : '/api/control/pause';
+            await fetch(endpoint, { method: 'POST' });
+            fetchState();
+        });
+
+        // Initialize
+        fetchState();
+        startCountdown();
+        setInterval(fetchState, 5000);
+    </script>
+</body>
+</html>
