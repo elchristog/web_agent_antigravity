@@ -1,0 +1,14 @@
+---
+description: Lexington Alfred theme — global conventions, imports, minimal diffs
+alwaysApply: true
+---
+
+# Lexington Alfred — global rules
+
+- This repo is the **Alfred** Astro theme (`@lexington/alfred`) from **Lexington Themes**. Prefer existing patterns over new abstractions.
+- **Imports:** use the `@/` alias (`@/layouts/...`, `@/components/...`, `@/styles/global.css`, `@/images/...`) as in current files.
+- **Spelling:** the shared UI folder is `src/components/fundations/` — do not rename to “foundations”; update only if the whole codebase is migrated consistently.
+- **Layouts:** marketing pages typically use `BaseLayout` from `src/layouts/BaseLayout.astro`, which pulls in `Navigation`, `Footer`, and `BaseHead` (SEO, fonts, favicons, Fuse.js, Keen Slider).
+- **Diff discipline:** change only what the task requires; avoid drive-by refactors, new dependencies not in `package.json`, or unsolicited markdown/docs.
+- **Lexington links:** product docs and support follow README-style URLs, e.g. https://lexingtonthemes.com/documentation and https://lexingtonthemes.com/legal/support/
+- **Accuracy:** do not invent features, integrations, or npm packages; verify against `src/` and `package.json`.

@@ -1,0 +1,14 @@
+---
+description: Alfred — astro.config and content collections must stay in sync
+globs:
+  - astro.config.mjs
+  - src/content.config.ts
+alwaysApply: false
+---
+
+# Config coordination (`astro.config.mjs`, `src/content.config.ts`)
+
+- **`astro.config.mjs`:** Tailwind via Vite (`@tailwindcss/vite`), integrations `sitemap()` and `mdx()`, `site` URL, markdown/Shiki options. Changing `site` affects sitemap and absolute URLs — update `Seo.astro` / RSS placeholders in the same customization pass when going to production.
+- **`src/content.config.ts`:** defines all `collections` keys (`helpcenter`, `changelog`, `infopages`, `integrations`, `team`, `posts`, `customers`). Renaming a collection or its `base` path requires updates to every `getCollection("...")` and `getEntry("...", ...)` usage across `src/pages/` and `src/layouts/`.
+- **Schema changes:** adding required Zod fields breaks existing MD files until they are filled in; prefer optional fields or migrate all entries together.
+- Do not add Astro integrations or Vite plugins that are not already dependencies in `package.json` without installing them.

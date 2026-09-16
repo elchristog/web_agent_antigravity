@@ -1,0 +1,45 @@
+---
+import { AstroSeo } from "@lexingtonthemes/seo";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+}
+
+const {
+  title = "Agencia para Enfermeras en USA | Homologación, Visa y Empleo",
+  description = "La principal y más grande agencia para enfermeros hispanos en Estados Unidos. Únete a miles de casos de éxito. Homologación, sponsor y empleo.",
+  canonical = "https://enfermerausa.com",
+  ogImage = "https://enfermerausa.com/og-image.jpg"
+} = Astro.props;
+---
+
+<AstroSeo
+  title={title}
+  description={description}
+  canonical={canonical}
+  openGraph={{
+    url: canonical,
+    title: title,
+    description: description,
+    images: [
+      {
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: title,
+        type: "image/jpeg",
+      },
+    ],
+    site_name: "Enfermera en Estados Unidos",
+    type: "website",
+    locale: "es_US",
+  }}
+  twitter={{
+    handle: "@enfermerausa",
+    site: "@enfermerausa",
+    cardType: "summary_large_image",
+  }}
+/>

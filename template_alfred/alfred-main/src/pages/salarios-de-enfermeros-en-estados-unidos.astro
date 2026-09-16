@@ -1,0 +1,106 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const salaryStates = [
+  { state: "California", avgSalary: "$133,340 / año", hourly: "$64.11 / hr" },
+  { state: "Texas", avgSalary: "$84,320 / año", hourly: "$40.54 / hr" },
+  { state: "Florida", avgSalary: "$80,960 / año", hourly: "$38.92 / hr" },
+  { state: "New York", avgSalary: "$100,130 / año", hourly: "$48.14 / hr" },
+  { state: "Illinois", avgSalary: "$85,500 / año", hourly: "$41.10 / hr" },
+  { state: "Washington", avgSalary: "$101,670 / año", hourly: "$48.88 / hr" },
+];
+---
+
+<BaseLayout
+  title="Salario de Enfermera en USA 2026 | Cuánto Gana por Estado y Especialidad"
+  description="Descubre cuánto gana una enfermera en Estados Unidos. Datos de 2026 sobre salarios promedio por estado, especialidades mejor pagadas e ingresos extras."
+  canonical="https://enfermerausa.com/salarios-de-enfermeros-en-estados-unidos/"
+  type="service"
+>
+  <div class="py-12 md:py-20 bg-gray-50 border-b border-gray-200">
+    <div class="max-w-screen-xl mx-auto px-4 md:px-8">
+      <div class="max-w-3xl">
+        <span class="text-emerald-700 font-bold text-xs uppercase tracking-wider bg-emerald-100 px-3 py-1 rounded-full">Análisis Económico 2026</span>
+        <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 tracking-tight mt-4 mb-6">
+          Salarios de Enfermeros en Estados Unidos 2026
+        </h1>
+        <p class="text-lg text-gray-600 leading-relaxed mb-8">
+          La profesión de Registered Nurse (RN) en Estados Unidos es una de las mejores pagadas y respetadas dentro del sector de la salud, ofreciendo estabilidad financiera, beneficios médicos completos y oportunidades de desarrollo.
+        </p>
+        <a
+          href="https://bit.ly/3R6RbFW"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-lg shadow transition-all gap-2"
+        >
+          <span>Agendar Sesión Informativa de Salarios</span>
+          <svg class="size-4 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="py-16 bg-white">
+    <div class="max-w-screen-xl mx-auto px-4 md:px-8 max-w-4xl space-y-8">
+      <h2 class="text-2xl font-bold text-gray-900">Salario Promedio Anual por Estado</h2>
+
+      <div class="overflow-x-auto border border-gray-200 rounded-xl shadow-sm">
+        <table class="w-full text-left text-sm text-gray-700">
+          <thead class="bg-gray-100 font-bold text-gray-900 uppercase text-xs">
+            <tr>
+              <th class="px-6 py-4">Estado</th>
+              <th class="px-6 py-4">Salario Promedio Anual</th>
+              <th class="px-6 py-4">Tarifa por Hora</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            {salaryStates.map((row) => (
+              <tr class="hover:bg-emerald-50/50">
+                <td class="px-6 py-4 font-bold text-gray-900">{row.state}</td>
+                <td class="px-6 py-4 text-emerald-800 font-semibold">{row.avgSalary}</td>
+                <td class="px-6 py-4 text-gray-600">{row.hourly}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Sección GEO / Respuestas Factuales para Google AI Overviews & Destacados SERP -->
+  <div class="py-12 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-screen-xl mx-auto px-4 md:px-8">
+      <h2 class="text-2xl font-bold text-slate-900 mb-6">Preguntas Frecuentes sobre Salarios de Enfermeros en EE.UU. por Estado (Clave: salarios enfermeros estados unidos)</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+          <h3 class="font-bold text-slate-900 text-lg mb-2">¿Cuál es el salario promedio por hora de una enfermera registrada (RN) en EE.UU.?</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">En 2026, el salario promedio nacional de una Registered Nurse (RN) en EE.UU. oscila entre $38 y $58 USD por hora. En estados como California y Nueva York supera los $65 USD/hora, con ingresos anuales de $80,000 a $120,000 USD.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+          <h3 class="font-bold text-slate-900 text-lg mb-2">¿Los hospitales patrocinadores pagan horas extra y bonos de relocalización?</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">Sí. La gran mayoría de ofertas para enfermeros internacionales contemplan bonos de inicio (signing bonus) de $5,000 a $15,000 USD, pago de tiempo extraordinario (overtime a 1.5x) y apoyo para pasajes aéreos y primer mes de vivienda.</p>
+        </div>
+      </div>
+      <div class="mt-8 text-center">
+        <a href="https://bit.ly/3R6RbFW" target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-lg shadow text-sm gap-2">
+          <span>Agendar Sesión Informativa de Salarios de Enfermeros en EE.UU. por Estado</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "Enfermera USA",
+    "url": "https://enfermerausa.com",
+    "description": "Agencia especializada en homologación de títulos de enfermería, examen NCLEX-RN y patrocinio de visa EB-3 para EE.UU.",
+    "areaServed": "United States",
+    "serviceType": "Nursing License & Visa Sponsorship Agency"
+  }
+  </script>
+
+</BaseLayout>

@@ -10,12 +10,24 @@ __pycache__/
 venv/
 .venv/
 env/
+node_env/
+google-cloud-sdk/
+
+# Descargas pesadas y archivos comprimidos
+*.tar.gz
+*.tar.xz
+*.zip
+
+# Astro / Node build outputs
+node_modules/
+dist/
+.astro/
+template_alfred/alfred-main/node_modules/
+template_alfred/alfred-main/dist/
+template_alfred/alfred-main/.astro/
 
 # IDEs y Editores
 .vscode/
 .idea/
 *.swp
 *.swo
-
-# Logs y Estado temporal (opcional, dejamos state.json.example si se prefiere)
-# logs/

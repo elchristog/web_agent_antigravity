@@ -1,0 +1,79 @@
+---
+interface Props {
+  type?: 'home' | 'service' | 'faq' | 'article';
+  title?: string;
+  description?: string;
+  url?: string;
+  faqs?: Array<{ question: string; answer: string }>;
+  datePublished?: string;
+}
+
+const {
+  type = 'home',
+  title = 'Enfermera en Estados Unidos - Agencia de Reclutamiento para Enfermeros Hispanos',
+  description = 'Agencia líder en homologación de título de enfermería, preparación NCLEX, visa EB-3 y patrocinio en EE.UU.',
+  url = 'https://enfermerausa.com',
+  faqs = [],
+  datePublished = '2026-01-01'
+} = Astro.props;
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "EducationalOccupationalProgram",
+  "name": "Programa de Homologación y Empleo para Enfermeras en EE.UU.",
+  "description": description,
+  "provider": {
+    "@type": "Organization",
+    "name": "Enfermera en Estados Unidos",
+    "url": "https://enfermerausa.com",
+    "logo": "https://enfermerausa.com/logo.png",
+    "sameAs": [
+      "https://www.instagram.com/enfermeraenestadosunidos"
+    ]
+  },
+  "occupationalCategory": "Registered Nurse (RN)",
+  "educationalProgramMode": "online",
+  "offers": {
+    "@type": "Offer",
+    "category": "Asesoría de Homologación y Visados"
+  }
+};
+
+const faqSchema = faqs.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+} : null;
+
+const articleSchema = type === 'article' ? {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "mainEntityOfPage": url,
+  "datePublished": datePublished,
+  "author": {
+    "@type": "Organization",
+    "name": "Enfermera en Estados Unidos"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Enfermera en Estados Unidos",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://enfermerausa.com/logo.png"
+    }
+  }
+} : null;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+{faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+{articleSchema && <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />}

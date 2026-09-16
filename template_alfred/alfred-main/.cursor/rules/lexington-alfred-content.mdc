@@ -1,0 +1,16 @@
+---
+description: Alfred — content collections, frontmatter, image() paths
+globs:
+  - src/content/**/*.md
+  - src/content/**/*.mdx
+alwaysApply: false
+---
+
+# Content files (`src/content/**`)
+
+- Schemas live in `src/content.config.ts`. Each collection uses a `glob` loader for `.md` and `.mdx` under its folder.
+- **When adding or editing frontmatter**, match the Zod schema for that collection exactly. Optional fields are only those declared with `.optional()`.
+- **`image()` fields** must use the `url` / `alt` object shape already used in this repo (e.g. `url: "/src/images/blog/1.jpg"`). Do not switch to remote-only URLs for required `image()` entries unless pages already support it.
+- **Blog `team` field:** must equal a **team** entry id (basename of `src/content/team/*.md`), because `BlogLayout.astro` calls `getEntry("team", frontmatter.team)`.
+- **New entries:** clone an existing file in the same folder (`1.md`, `david-lee.md`, etc.) to preserve field names and nesting (`details`, `challengesAndSolutions`, `permissions`, …).
+- Do not rename the `fundations` components folder from content-related docs or frontmatter — unrelated to MD files but reserved globally.

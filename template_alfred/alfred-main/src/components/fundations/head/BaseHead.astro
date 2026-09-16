@@ -1,0 +1,22 @@
+---
+import Seo from "@/components/fundations/head/Seo.astro";
+import Meta from "@/components/fundations/head/Meta.astro";
+import Fonts from "@/components/fundations/head/Fonts.astro";
+import Favicons from "@/components/fundations/head/Favicons.astro";
+import JsonLd from "@/components/fundations/head/JsonLd.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  type?: 'home' | 'service' | 'faq' | 'article';
+  faqs?: Array<{ question: string; answer: string }>;
+}
+
+const { title, description, canonical, type = 'home', faqs = [] } = Astro.props;
+---
+<Seo title={title} description={description} canonical={canonical} />
+<Meta />
+<Fonts />
+<Favicons />
+<JsonLd type={type} title={title} description={description} url={canonical} faqs={faqs} />

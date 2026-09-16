@@ -1,0 +1,76 @@
+---
+const footerLinks = [
+  {
+    title: "Servicios Principales",
+    links: [
+      { href: "/evaluacion-y-homologacion-de-titulo-enfermeria-usa/", label: "Homologación CGFNS / TruMerit" },
+      { href: "/licencia-de-enfermeria-y-examen-nclex-usa/", label: "Licencia RN y Examen NCLEX" },
+      { href: "/ofertas-de-empleo-para-enfermeras-en-usa/", label: "Ofertas Laborales con Sponsor" },
+      { href: "/proceso-de-visa-y-relocalizacion-para-enfermeras/", label: "Visa EB-3 y Green Card" },
+      { href: "/salarios-de-enfermeros-en-estados-unidos/", label: "Salarios 2026 por Estado" },
+    ],
+  },
+  {
+    title: "Recursos & Blog",
+    links: [
+      { href: "/blog/home/", label: "Blog de Enfermería en USA" },
+      { href: "/licencia-de-enfermeria-y-examen-nclex-usa/", label: "Guía Definitiva NCLEX" },
+      { href: "/salarios-de-enfermeros-en-estados-unidos/", label: "Calculadora de Salarios" },
+    ],
+  },
+  {
+    title: "Contacto & Asesoría",
+    links: [
+      { href: "https://bit.ly/3R6RbFW", label: "Agendar Sesión Informativa" },
+      { href: "https://www.instagram.com/enfermeraenestadosunidos", label: "Instagram Oficial" },
+    ],
+  },
+];
+---
+
+<footer class="bg-gray-900 text-white mt-16 py-12 border-t border-gray-800">
+  <div class="max-w-screen-xl mx-auto px-4 md:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+      <div>
+        <div class="mb-4">
+          <img loading="lazy" decoding="async" src="/logo.webp" alt="Enfermera en EE.UU. Logo" class="h-10 w-auto object-contain brightness-0 invert" />
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+          La agencia #1 para enfermeros hispanos. Te acompañamos desde la homologación de tu título hasta tu contrato en los mejores hospitales de Estados Unidos.
+        </p>
+        <a
+          href="https://bit.ly/3R6RbFW"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold py-2 px-4 rounded shadow transition-all"
+        >
+          Agendar Sesión Informativa
+        </a>
+      </div>
+
+      {footerLinks.map((col) => (
+        <div>
+          <h3 class="font-semibold text-white mb-4 text-base tracking-wide">{col.title}</h3>
+          <ul class="space-y-2 text-sm">
+            {col.links.map((link) => (
+              <li>
+                <a href={link.href} class="text-gray-400 hover:text-emerald-400 transition-colors">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+      <p>© 2026 enfermerausa.com — Agencia de Reclutamiento para Enfermeros Hispanos en EE.UU. Todos los derechos reservados.</p>
+      <div class="flex gap-4">
+        <a href="/" class="hover:text-gray-300">Inicio</a>
+        <a href="/blog/home/" class="hover:text-gray-300">Blog</a>
+        <a href="https://bit.ly/3R6RbFW" class="hover:text-gray-300">Contacto</a>
+      </div>
+    </div>
+  </div>
+</footer>

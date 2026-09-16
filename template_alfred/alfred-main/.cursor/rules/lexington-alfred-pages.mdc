@@ -1,0 +1,15 @@
+---
+description: Alfred — Astro pages, routing, layouts
+globs:
+  - src/pages/**/*.astro
+  - src/pages/**/*.js
+alwaysApply: false
+---
+
+# Pages (`src/pages/**`)
+
+- **File-based routing:** paths mirror the directory structure (e.g. `blog/home.astro` → `/blog/home`, `blog/posts/[...slug].astro` → `/blog/posts/:slug`).
+- **Content-driven routes** use `getCollection` + `getStaticPaths` with `params.slug` (or `[...slug]`) set to `entry.id` — the content file basename.
+- **Layouts:** dynamic sections use dedicated layouts (`BlogLayout`, `ChangelogLayout`, `HelpcenterLayout`, `IntegrationsLayout`, `TeamLayout`, `CustomersLayout`, `InfoPagesLayout`) passed `frontmatter={entry.data}` (or equivalent). Do not break prop shapes expected by those layouts.
+- **Listing URLs** in components are hard-coded patterns (e.g. `/blog/posts/` + id, `/integrations/` + id). If you add a new content-driven section, follow the same id-based URL pattern as sibling pages.
+- RSS: `src/pages/rss.xml.js` uses the `posts` collection; keep item links consistent with how blog cards link (`BlogEntries.astro`).
