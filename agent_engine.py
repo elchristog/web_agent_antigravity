@@ -676,12 +676,22 @@ class OnPageContentAndLinkBuilder:
                 result["description"] = f"Expandido contenido visible On-Page en '{target_exp['rel_path']}': Inyectada nueva sección temática con tablas y guías de contenido para atacar palabras clave y mejorar el tiempo de permanencia."
                 return result
 
-        # 2. Linkbuilding Interno Automatizado (Silo Internal Linkbuilding Network)
-        # Buscar palabras clave sin enlace en los artículos del blog y convertirlas en anchors a landings principales
+        # 2. Linkbuilding Interno Automatizado (Silo Architecture & Topical Authority Engine)
+        # Matriz extendida de palabras clave y variaciones LSI para distribuir autoridad (PageRank) sin sobre-optimización
         link_targets = [
             {
                 "keyword": "homologar título de enfermería",
                 "anchor": "[homologar título de enfermería](/evaluacion-y-homologacion-de-titulo-enfermeria-usa/)",
+                "target_page": "/evaluacion-y-homologacion-de-titulo-enfermeria-usa/"
+            },
+            {
+                "keyword": "homologación de título",
+                "anchor": "[homologación de título](/evaluacion-y-homologacion-de-titulo-enfermeria-usa/)",
+                "target_page": "/evaluacion-y-homologacion-de-titulo-enfermeria-usa/"
+            },
+            {
+                "keyword": "revalidar título de enfermería",
+                "anchor": "[revalidar título de enfermería](/evaluacion-y-homologacion-de-titulo-enfermeria-usa/)",
                 "target_page": "/evaluacion-y-homologacion-de-titulo-enfermeria-usa/"
             },
             {
@@ -690,13 +700,43 @@ class OnPageContentAndLinkBuilder:
                 "target_page": "/licencia-de-enfermeria-y-examen-nclex-usa/"
             },
             {
+                "keyword": "licencia de enfermería",
+                "anchor": "[licencia de enfermería](/licencia-de-enfermeria-y-examen-nclex-usa/)",
+                "target_page": "/licencia-de-enfermeria-y-examen-nclex-usa/"
+            },
+            {
+                "keyword": "aprobar el NCLEX",
+                "anchor": "[aprobar el NCLEX](/licencia-de-enfermeria-y-examen-nclex-usa/)",
+                "target_page": "/licencia-de-enfermeria-y-examen-nclex-usa/"
+            },
+            {
+                "keyword": "ofertas de empleo para enfermeras",
+                "anchor": "[ofertas de empleo para enfermeras](/ofertas-de-empleo-para-enfermeras-en-usa/)",
+                "target_page": "/ofertas-de-empleo-para-enfermeras-en-usa/"
+            },
+            {
+                "keyword": "trabajo de enfermería en USA",
+                "anchor": "[trabajo de enfermería en USA](/ofertas-de-empleo-para-enfermeras-en-usa/)",
+                "target_page": "/ofertas-de-empleo-para-enfermeras-en-usa/"
+            },
+            {
                 "keyword": "Visa EB-3",
                 "anchor": "[Visa EB-3](/proceso-de-visa-y-relocalizacion-para-enfermeras/)",
                 "target_page": "/proceso-de-visa-y-relocalizacion-para-enfermeras/"
             },
             {
+                "keyword": "sponsor de visa",
+                "anchor": "[sponsor de visa](/proceso-de-visa-y-relocalizacion-para-enfermeras/)",
+                "target_page": "/proceso-de-visa-y-relocalizacion-para-enfermeras/"
+            },
+            {
                 "keyword": "salarios de enfermeros",
                 "anchor": "[salarios de enfermeros](/salarios-de-enfermeros-en-estados-unidos/)",
+                "target_page": "/salarios-de-enfermeros-en-estados-unidos/"
+            },
+            {
+                "keyword": "cuánto gana una enfermera en Estados Unidos",
+                "anchor": "[cuánto gana una enfermera en Estados Unidos](/salarios-de-enfermeros-en-estados-unidos/)",
                 "target_page": "/salarios-de-enfermeros-en-estados-unidos/"
             }
         ]
@@ -709,14 +749,14 @@ class OnPageContentAndLinkBuilder:
                 
                 for lt in link_targets:
                     # Verificar si la palabra clave existe en el post pero aún no es un enlace Markdown
-                    if lt["keyword"] in post_content and lt["anchor"] not in post_content:
-                        # Reemplazar la primera ocurrencia por un enlace contextual
+                    if lt["keyword"] in post_content and lt["target_page"] not in post_content:
+                        # Reemplazar la primera ocurrencia por un enlace contextual de silo
                         new_content = post_content.replace(lt["keyword"], lt["anchor"], 1)
                         post.write_text(new_content, encoding="utf-8")
                         result["modified"] = True
                         result["modified_file"] = rel_post
-                        result["type"] = "Internal Linkbuilding"
-                        result["description"] = f"Construido enlazado interno SEO en '{rel_post}': Convertida la palabra clave '{lt['keyword']}' en anchor link contextual hacia '{lt['target_page']}'."
+                        result["type"] = "Silo Architecture Linkbuilding"
+                        result["description"] = f"Construido enlazado interno de Autoría Temática (Silo Architecture) en '{rel_post}': Convertida la palabra clave '{lt['keyword']}' en anchor link contextual hacia '{lt['target_page']}'."
                         return result
 
         return result
