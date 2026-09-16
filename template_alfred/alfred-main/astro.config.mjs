@@ -2,8 +2,13 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx"; 
+
 export default defineConfig({
-   vite: {
+  site: 'https://enfermerausa.com',
+  build: {
+    inlineStylesheets: 'always'
+  },
+  vite: {
     plugins: [tailwindcss()],
   },
   markdown: {
@@ -17,6 +22,5 @@ export default defineConfig({
     skipInline: false,
     drafts: true
   },
-  site: 'https://yourdomain.com',
   integrations: [ sitemap(), mdx()]
 });

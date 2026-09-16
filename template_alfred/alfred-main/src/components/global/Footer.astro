@@ -21,7 +21,7 @@ const footerLinks = [
   {
     title: "Redes Oficiales & Contacto",
     links: [
-      { href: "mailto:hello@enfermeraenestadosunidos.com", label: "✉️ hello@enfermeraenestadosunidos.com" },
+      { href: "mailto:hello@enfermeraenestadosunidos.com", label: "✉️ hello@enfermeraenestadosunidos.com", isEmail: true },
       { href: "https://www.instagram.com/enfermeraenestadosunidos", label: "📸 Instagram Oficial", external: true },
       { href: "https://www.facebook.com/enfermeraenestadosunidosusa", label: "👍 Facebook Oficial", external: true },
       { href: "https://www.youtube.com/@enfermeraenestadosunidos", label: "▶️ YouTube Oficial", external: true },
@@ -69,7 +69,7 @@ const footerLinks = [
                   rel={link.external ? "noopener noreferrer" : ""}
                   class="text-gray-400 hover:text-emerald-400 transition-colors"
                 >
-                  {link.label}
+                  {link.isEmail ? <Fragment set:html="<!--email_off-->✉️ hello@enfermeraenestadosunidos.com<!--/email_off-->" /> : link.label}
                 </a>
               </li>
             ))}
@@ -83,7 +83,7 @@ const footerLinks = [
       <div class="flex gap-4">
         <a href="/" class="hover:text-gray-300">Inicio</a>
         <a href="/blog/home/" class="hover:text-gray-300">Blog</a>
-        <a href="mailto:hello@enfermeraenestadosunidos.com" class="hover:text-gray-300">hello@enfermeraenestadosunidos.com</a>
+        <a href="mailto:hello@enfermeraenestadosunidos.com" class="hover:text-gray-300"><Fragment set:html="<!--email_off-->hello@enfermeraenestadosunidos.com<!--/email_off-->" /></a>
       </div>
     </div>
   </div>
