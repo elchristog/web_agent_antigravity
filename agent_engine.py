@@ -1354,6 +1354,81 @@ Si deseas dar el paso hacia tu ejercicio profesional en EE.UU. con residencia pe
         result["description"] = f"Creado 1 artículo diario de YouTube '{target_video['title']}' en 'src/content/posts/{target_video['slug']}.md' con vídeo embebido, marcado VideoObject y enlazado Silo."
         return result
 
+class NetworkCrossLinkbuilderEngine:
+    """Motor Autónomo de Linkbuilding Cruzado entre Sitios Espejo de la Red (Multi-Agent PBN Engine)"""
+    def __init__(self, astro_dir: Path, network_file: Path, current_domain: str):
+        self.astro_dir = astro_dir
+        self.footer_path = astro_dir / "src" / "components" / "global" / "Footer.astro"
+        self.network_file = network_file
+        self.current_domain = current_domain
+
+    def sync_network_backlinks(self) -> dict:
+        result = {
+            "modified": False,
+            "modified_file": "",
+            "description": ""
+        }
+        
+        if not self.network_file.exists() or not self.footer_path.exists():
+            return result
+
+        try:
+            network_sites = json.loads(self.network_file.read_text(encoding="utf-8"))
+        except Exception:
+            return result
+
+        # Filtrar sitios de la red excluyendo el propio dominio
+        other_sites = [s for s in network_sites if s.get("domain") and s.get("domain") != self.current_domain]
+        if not other_sites:
+            return result
+
+        footer_content = self.footer_path.read_text(encoding="utf-8")
+        
+        # Verificar si ya están los enlaces de la red o si falta alguno
+        missing = False
+        for site in other_sites:
+            url = site.get("url", f"https://{site['domain']}")
+            if url not in footer_content:
+                missing = True
+                break
+
+        if not missing:
+            return result
+
+        # Construir bloque HTML de Red de Portales Aliados
+        links_html = "\n".join([
+            f'        <a href="{s.get("url", "https://" + s["domain"])}" target="_blank" rel="noopener" class="hover:text-emerald-400 transition-colors">{s.get("label", s["domain"])}</a>'
+            for s in other_sites
+        ])
+
+        network_block = f"""
+    <!-- Bloque Red Oficial de Portales Espejo (Network Linkbuilding) -->
+    <div class="border-t border-gray-800 pt-4 mt-6 text-center text-xs text-gray-400">
+      <p class="font-bold text-gray-300 mb-2">🌐 Red Oficial de Portales Especializados en Enfermería USA:</p>
+      <div class="flex flex-wrap justify-center gap-4">
+{links_html}
+      </div>
+    </div>"""
+
+        if "<!-- Bloque Red Oficial de Portales Espejo (Network Linkbuilding) -->" in footer_content:
+            import re
+            footer_content = re.sub(
+                r'<!-- Bloque Red Oficial de Portales Espejo \(Network Linkbuilding\) -->.*?</div>\n    </div>',
+                network_block.strip(),
+                footer_content,
+                flags=re.DOTALL
+            )
+        else:
+            if "</footer>" in footer_content:
+                footer_content = footer_content.replace("</footer>", f"{network_block}\n</footer>")
+
+        self.footer_path.write_text(footer_content, encoding="utf-8")
+
+        result["modified"] = True
+        result["modified_file"] = str(self.footer_path.relative_to(self.astro_dir))
+        result["description"] = f"Construido enlazado cruzado de red (Cross-Domain Network Linkbuilding) en '{result['modified_file']}': Enlazados {len(other_sites)} portales espejo de la red para transferencia de autoridad de dominio."
+        return result
+
 class AutonomousGrowthEngine:
     """Motor Autónomo de Generación de Contenido SEO/GEO y Páginas Transaccionales para Posicionamiento en Google SERP"""
     def __init__(self, astro_dir: Path):
@@ -1570,6 +1645,7 @@ class AgentEngine:
         self.intent_resolver = SearchIntentResolverEngine(ASTRO_DIR)
         self.competitor_outranker = CompetitiveSERPOutrankerEngine(ASTRO_DIR)
         self.youtube_engine = YouTubeToBlogGrowthEngine(ASTRO_DIR, BASE_DIR / "state.json")
+        self.network_linkbuilder = NetworkCrossLinkbuilderEngine(ASTRO_DIR, BASE_DIR / "agents_network.json", "enfermerausa.com")
 
     def check_web_operability(self) -> dict:
         """Verifica la conectividad real del dominio y del bucket de GCP"""
@@ -1693,6 +1769,13 @@ class AgentEngine:
             trans_opt["fixes_applied"].append(yt_res["description"])
             if yt_res["filename"] not in trans_opt["modified_pages"]:
                 trans_opt["modified_pages"].append(yt_res["filename"])
+
+        # L. Sincronización de Linkbuilding Cruzado entre Sitios Espejo de la Red
+        net_res = self.network_linkbuilder.sync_network_backlinks()
+        if net_res["modified"]:
+            trans_opt["fixes_applied"].append(net_res["description"])
+            if net_res["modified_file"] not in trans_opt["modified_pages"]:
+                trans_opt["modified_pages"].append(net_res["modified_file"])
 
         # E. Re-compilar el sitio estático Astro con Node v22
         env = os.environ.copy()

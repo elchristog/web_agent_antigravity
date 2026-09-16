@@ -63,8 +63,40 @@ def check_agent_status(agent_dir: Path) -> dict:
         "iteration": iteration
     }
 
+def sync_network_registry():
+    """Sincroniza el registro central de todos los sitios espejo de la red para linkbuilding cruzado"""
+    network_file = BASE_DIR / "agents_network.json"
+    agents = get_agent_directories()
+    network_data = []
+
+    for agent_dir in agents:
+        st = check_agent_status(agent_dir)
+        domain = st["domain"]
+        clean_name = st["name"].replace("agente_", "")
+        
+        # Etiqueta amigable según el nicho del agente
+        label = f"Enfermera en EE.UU. ({domain})"
+        if "colombia" in domain or "colombia" in clean_name:
+            label = "Enfermeras de Colombia en USA"
+        elif "mexico" in domain or "mexico" in clean_name:
+            label = "Enfermeras de México en USA"
+        elif "hispanas" in domain or "hispanas" in clean_name:
+            label = "Comunidad de Enfermeras Hispanas EE.UU."
+
+        network_data.append({
+            "name": st["name"],
+            "domain": domain,
+            "url": f"https://{domain}",
+            "label": label,
+            "path": str(agent_dir)
+        })
+
+    network_file.write_text(json.dumps(network_data, indent=2), encoding="utf-8")
+    return network_data
+
 def cmd_status():
     """Muestra el panel en vivo de todos los agentes"""
+    sync_network_registry()
     agents = get_agent_directories()
     print("\n" + "=" * 80)
     print("🤖 PANEL DE CONTROL DE AGENTES AUTÓNOMOS (MULTI-AGENT MANAGER)")
@@ -117,6 +149,7 @@ def cmd_create(name: str, domain: str):
 
     print(f"✅ Agente 'agente_{clean_name}' creado con éxito para el dominio '{domain}'.")
     print(f"👉 Para iniciarlo ejecuta: python3 agent_manager.py start {clean_name}")
+    sync_network_registry()
 
 def cmd_start(name: str):
     clean_name = name.lower().replace(" ", "_")
