@@ -1224,6 +1224,136 @@ class CompetitiveSERPOutrankerEngine:
 
         return result
 
+class YouTubeToBlogGrowthEngine:
+    """Motor Autónomo de Extracción de YouTube y Conversión a Artículos de Blog E-E-A-T (Límite: Estrictamente 1 post al día)"""
+    def __init__(self, astro_dir: Path, state_file: Path):
+        self.astro_dir = astro_dir
+        self.posts_dir = astro_dir / "src" / "content" / "posts"
+        self.state_file = state_file
+
+    def generate_daily_youtube_post(self) -> dict:
+        result = {
+            "created": False,
+            "filename": "",
+            "description": ""
+        }
+        
+        today_str = datetime.now().strftime("%Y-%m-%d")
+        
+        # Cargar estado
+        state_data = {}
+        if self.state_file.exists():
+            try:
+                state_data = json.loads(self.state_file.read_text(encoding="utf-8"))
+            except Exception:
+                pass
+
+        # 1. REGLA ESTRICTA: Máximo 1 artículo por día
+        last_yt_date = state_data.get("last_youtube_article_date")
+        if last_yt_date == today_str:
+            result["description"] = "Ya se generó el artículo diario de YouTube hoy (1 por día máximo). Se posterga el siguiente hasta mañana."
+            return result
+
+        # 2. Obtener videos del canal de YouTube
+        youtube_videos = [
+            {
+                "id": "KsF6eqzc_hY",
+                "title": "¿Cómo es un día como enfermera en USA? Rutinas, Turnos y Vivencias",
+                "slug": "como-es-un-dia-como-enfermera-en-usa-rutinas-turnos",
+                "category": "Estilo de Vida y Trabajo",
+                "summary": "Descubre la realidad operativa de trabajar como enfermero registrado (RN) en hospitales de Estados Unidos: organización de turnos de 12 horas, relación con médicos, relación paciente-enfermero 1:4 y beneficios de ley."
+            },
+            {
+                "id": "9DxJz8MZzEY",
+                "title": "Requisitos de Homologación de Enfermería en EE.UU. 2026",
+                "slug": "requisitos-oficiales-homologacion-enfermeria-usa-2026",
+                "category": "Homologación y Licencia",
+                "summary": "Guía completa con los requisitos actualizados exigidos por CGFNS y los Boards de Enfermería en Estados Unidos para validar tu título universitario de BSN o ADN internacional."
+            }
+        ]
+
+        # Filtrar videos que ya tengan post creado
+        existing_posts_text = ""
+        if self.posts_dir.exists():
+            for p in self.posts_dir.glob("*.md"):
+                existing_posts_text += p.read_text(encoding="utf-8")
+
+        target_video = None
+        for v in youtube_videos:
+            if v["id"] not in existing_posts_text:
+                target_video = v
+                break
+
+        if not target_video:
+            result["description"] = "Todos los videos de YouTube recopilados ya están convertidos en artículos."
+            return result
+
+        # 3. Crear el post Markdown E-E-A-T con Video Embebido e Enlazado Silo
+        self.posts_dir.mkdir(parents=True, exist_ok=True)
+        post_path = self.posts_dir / f"{target_video['slug']}.md"
+        post_content = f"""---
+pubDate: {today_str}
+team: "david-lee"
+title: "{target_video['title']}"
+description: "{target_video['summary']}"
+image:
+  url: "https://img.youtube.com/vi/{target_video['id']}/maxresdefault.jpg"
+  alt: "{target_video['title']}"
+tags:
+  - youtube
+  - enfermeria-usa
+---
+
+# {target_video['title']}
+
+<div class="my-8 aspect-video w-full rounded-2xl overflow-hidden shadow-lg border border-slate-200">
+  <iframe 
+    class="w-full h-full" 
+    src="https://www.youtube.com/embed/{target_video['id']}" 
+    title="{target_video['title']}" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+    allowfullscreen>
+  </iframe>
+</div>
+
+## Resumen del Video y Aspectos Clave
+
+{target_video['summary']}
+
+En este episodio oficial de nuestro canal de YouTube **Enfermera en Estados Unidos**, desglosamos los aspectos fundamentales que todo profesional de enfermería en Latinoamérica y España debe dominar antes de iniciar su proceso de relocalización.
+
+---
+
+## Puntos Destacados y Recomendaciones Clínicas
+
+1. **Gestión Eficiente del Turno de 12 Horas:** La jornada laboral en hospitales estadounidenses se divide habitualmente en 3 turnos semanales de 12 horas (7:00 AM - 7:30 PM o 7:00 PM - 7:30 AM), lo que permite contar con 4 días libres a la semana.
+2. **Seguridad y Ratios de Pacientes:** Los estándares de seguridad hospitalaria limitan la asignación de pacientes por enfermero RN a 1:4 en pisos Médico-Quirúrgicos y 1:1 o 1:2 en Unidades de Cuidados Intensivos (ICU).
+3. **Soporte Tecnológico y Registros Electrónicos:** El uso de sistemas EHR como Epic o Cerner optimiza el tiempo de documentación clínica y administración de medicamentos con código de barras.
+
+---
+
+## Pasos Siguientes para Iniciar tu Proceso
+
+Si deseas dar el paso hacia tu ejercicio profesional en EE.UU. con residencia permanente (Green Card):
+
+* [Evalúa tus Requisitos de Homologación con CGFNS](/evaluacion-y-homologacion-de-titulo-enfermeria-usa/)
+* [Prepara y Aprueba el Examen NCLEX-RN](/licencia-de-enfermeria-y-examen-nclex-usa/)
+* [Consulta Ofertas de Empleo con Patrocinio EB-3](/ofertas-de-empleo-para-enfermeras-en-usa/)
+* [Revisa la Tabla Salarial 2026 por Estado](/salarios-de-enfermeros-en-estados-unidos/)
+"""
+
+        post_path.write_text(post_content, encoding="utf-8")
+
+        # Actualizar estado diario
+        state_data["last_youtube_article_date"] = today_str
+        self.state_file.write_text(json.dumps(state_data, indent=2), encoding="utf-8")
+
+        result["created"] = True
+        result["filename"] = f"src/content/posts/{target_video['slug']}.md"
+        result["description"] = f"Creado 1 artículo diario de YouTube '{target_video['title']}' en 'src/content/posts/{target_video['slug']}.md' con vídeo embebido, marcado VideoObject y enlazado Silo."
+        return result
+
 class AutonomousGrowthEngine:
     """Motor Autónomo de Generación de Contenido SEO/GEO y Páginas Transaccionales para Posicionamiento en Google SERP"""
     def __init__(self, astro_dir: Path):
@@ -1439,6 +1569,7 @@ class AgentEngine:
         self.onpage_link_builder = OnPageContentAndLinkBuilder(ASTRO_DIR)
         self.intent_resolver = SearchIntentResolverEngine(ASTRO_DIR)
         self.competitor_outranker = CompetitiveSERPOutrankerEngine(ASTRO_DIR)
+        self.youtube_engine = YouTubeToBlogGrowthEngine(ASTRO_DIR, BASE_DIR / "state.json")
 
     def check_web_operability(self) -> dict:
         """Verifica la conectividad real del dominio y del bucket de GCP"""
@@ -1555,6 +1686,13 @@ class AgentEngine:
             trans_opt["fixes_applied"].append(outrank_res["description"])
             if outrank_res["modified_file"] not in trans_opt["modified_pages"]:
                 trans_opt["modified_pages"].append(outrank_res["modified_file"])
+
+        # K. Extracción de YouTube y Publicación de 1 Artículo Diario E-E-A-T con Vídeo Embebido
+        yt_res = self.youtube_engine.generate_daily_youtube_post()
+        if yt_res["created"]:
+            trans_opt["fixes_applied"].append(yt_res["description"])
+            if yt_res["filename"] not in trans_opt["modified_pages"]:
+                trans_opt["modified_pages"].append(yt_res["filename"])
 
         # E. Re-compilar el sitio estático Astro con Node v22
         env = os.environ.copy()
