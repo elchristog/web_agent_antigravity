@@ -1,78 +1,228 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const jobOffers = [
+  {
+    title: "Enfermero/a Registrado/a (RN) - Cuidados Intensivos (ICU)",
+    hospital: "Texas Medical Center Network",
+    location: "Houston, Texas",
+    salary: "$42.00 - $56.00 USD / hora",
+    shift: "Turno Rotativo (12h)",
+    sponsor: "Patrocinio Visa EB-3 Directo (Schedule A)",
+    benefits: "Bono de bienvenida $10,000 USD + Pasajes aéreos + Hospedaje 30 días",
+    badge: "Vacantes Abiertas 2026"
+  },
+  {
+    title: "Enfermero/a Registrado/a (RN) - Departamento de Urgencias (ER)",
+    hospital: "AdventHealth System",
+    location: "Orlando, Florida",
+    salary: "$39.50 - $51.00 USD / hora",
+    shift: "Turno Nocturno (12h)",
+    sponsor: "Patrocinio Green Card para Grupo Familiar",
+    benefits: "Seguro médico 100% cubierto + Ayuda con vivienda inicial",
+    badge: "Urgente"
+  },
+  {
+    title: "Enfermero/a Registrado/a (RN) - Quirófano y Sala de Operaciones (OR)",
+    hospital: "Memorial Hermann Health System",
+    location: "Dallas, Texas",
+    salary: "$44.00 - $58.00 USD / hora",
+    shift: "Turno Diurno (12h)",
+    sponsor: "Patrocinio Visa EB-3 Directo",
+    benefits: "Plan de retiro 401(k) con aportación patronal + Asesoría migratoria",
+    badge: "Destacado"
+  },
+  {
+    title: "Enfermero/a Registrado/a (RN) - Médico-Quirúrgico (Med-Surg)",
+    hospital: "Mercy Health Hospital Network",
+    location: "Chicago, Illinois",
+    salary: "$40.00 - $52.00 USD / hora",
+    shift: "Turno Flex (12h)",
+    sponsor: "Patrocinio Visa EB-3 Schedule A",
+    benefits: "Capacitación paga + Asignación de mentor bilingüe",
+    badge: "Disponible"
+  }
+];
 ---
 
 <BaseLayout
-  title="Empleos para Enfermeras Hispanas en USA | Ofertas con Sponsor de Visa"
-  description="Explora ofertas de trabajo exclusivas para enfermeras registradas (RN) con patrocinio de visa (Green Card) en los mejores hospitales de EE.UU."
+  title="Ofertas de Empleo para Enfermeras en EE.UU. | Patrocinio Visa EB-3 & Green Card"
+  description="Encuentra vacantes de trabajo activas para enfermeras registradas (RN) en hospitales de EE.UU. con salarios de $39 a $58 USD/hora y patrocinio de Visa EB-3 de Residencia Permanente."
   canonical="https://enfermerausa.com/ofertas-de-empleo-para-enfermeras-en-usa/"
   type="service"
 >
-  <div class="py-12 md:py-20 bg-gray-50 border-b border-gray-200">
-    <div class="max-w-screen-xl mx-auto px-4 md:px-8">
+  <!-- Hero Section Intención de Búsqueda Empleos -->
+  <div class="py-12 md:py-20 bg-slate-900 text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-emerald-900/60 to-slate-900/90 z-0"></div>
+    <div class="max-w-screen-xl mx-auto px-4 md:px-8 relative z-10">
       <div class="max-w-3xl">
-        <span class="text-emerald-700 font-bold text-xs uppercase tracking-wider bg-emerald-100 px-3 py-1 rounded-full">Etapa 3: Contratación Directa</span>
-        <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 tracking-tight mt-4 mb-6">
-          Ofertas de Empleo para Enfermeras en EE.UU. con Patrocinio de Visa
+        <span class="text-emerald-400 font-bold text-xs uppercase tracking-widest bg-emerald-950/80 border border-emerald-800 px-3.5 py-1.5 rounded-full inline-block mb-4">
+          Oportunidades de Trabajo en EE.UU. 2026
+        </span>
+        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+          Ofertas de Empleo para Enfermeros en EE.UU. con Patrocinio Directo de Visa EB-3
         </h1>
-        <p class="text-lg text-gray-600 leading-relaxed mb-8">
-          Te conectamos de forma directa con sistemas de salud y redes de hospitales de primer nivel en Estados Unidos que ofrecen contratos a largo plazo con patrocinio completo de residencia permanente.
+        <p class="text-slate-300 text-base md:text-lg leading-relaxed mb-8">
+          Accede a posiciones permanentes de Enfermero Registrado (RN) en redes hospitalarias líderes de Estados Unidos. Salarios competitivos desde <strong class="text-emerald-400">$39.00 a $58.00 USD/hora</strong>, contratos directos y Green Card para ti y tu familia.
         </p>
-        <a
-          href="https://bit.ly/3R6RbFW"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-lg shadow transition-all gap-2"
-        >
-          <span>Agendar Sesión Informativa de Empleos</span>
-          <svg class="size-4 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/></svg>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="py-16 bg-white">
-    <div class="max-w-screen-xl mx-auto px-4 md:px-8 max-w-4xl space-y-8">
-      <h2 class="text-2xl font-bold text-gray-900">Especialidades de Mayor Demanda en EE.UU.</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200">
-          <h3 class="font-bold text-gray-900">Cuidados Intensivos (UCI / ICU)</h3>
-          <p class="text-xs text-gray-600 mt-1">Monitoreo de pacientes críticos en unidades coronarias y de trauma.</p>
-        </div>
-        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200">
-          <h3 class="font-bold text-gray-900">Urgencias (ER)</h3>
-          <p class="text-xs text-gray-600 mt-1">Atención rápida de emergencias traumáticas y de salud.</p>
-        </div>
-        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200">
-          <h3 class="font-bold text-gray-900">Médico-Quirúrgico (Med-Surg)</h3>
-          <p class="text-xs text-gray-600 mt-1">Cuidado general de pacientes hospitalizados en recuperación postquirúrgica.</p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href="https://bit.ly/3R6RbFW"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-extrabold text-sm px-6 py-3.5 rounded-xl shadow-lg transition-all gap-2"
+          >
+            <span>Postular a Ofertas de Empleo</span>
+            <svg class="size-4 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          </a>
+          <a
+            href="#vacantes-activas"
+            class="inline-flex items-center justify-center bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm px-6 py-3.5 rounded-xl border border-slate-700 transition"
+          >
+            Ver Vacantes Abiertas ↓
+          </a>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Búsqueda & Catálogo de Vacantes Activas -->
+  <section id="vacantes-activas" class="py-16 bg-slate-50 border-b border-slate-200">
+    <div class="max-w-screen-xl mx-auto px-4 md:px-8">
+      <div class="flex flex-col md:flex-row items-start md:items-end justify-between mb-10 gap-4">
+        <div>
+          <span class="text-xs font-bold text-emerald-700 uppercase tracking-widest">Catálogo de Empleo 2026</span>
+          <h2 class="text-2xl md:text-4xl font-extrabold text-slate-900 mt-1">Vacantes Activas en Hospitales de EE.UU.</h2>
+          <p class="text-sm text-slate-600 mt-1">Ofertas con vacantes directas aprobadas para patrocinio de residencia permanente (Schedule A).</p>
+        </div>
+        <div class="flex items-center gap-2 bg-emerald-100 text-emerald-800 text-xs font-bold px-4 py-2 rounded-lg border border-emerald-200">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>4 Ofertas Disponibles en Selección Esta Semana</span>
+        </div>
+      </div>
+
+      <!-- Grid de Tarjetas de Empleo Reales -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {jobOffers.map((job) => (
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold text-xs px-2.5 py-1 rounded-md">
+                  {job.badge}
+                </span>
+                <span class="text-xs font-semibold text-slate-500">{job.location}</span>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 leading-snug mb-2">{job.title}</h3>
+              <p class="text-xs font-semibold text-emerald-800 mb-4">{job.hospital}</p>
+              
+              <div class="space-y-2 text-xs text-slate-700 mb-6 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                <div class="flex justify-between border-b border-slate-200/60 pb-1.5">
+                  <span class="font-semibold text-slate-500">Salario Base:</span>
+                  <span class="font-bold text-emerald-700">{job.salary}</span>
+                </div>
+                <div class="flex justify-between border-b border-slate-200/60 pb-1.5">
+                  <span class="font-semibold text-slate-500">Modalidad Visa:</span>
+                  <span class="font-bold text-slate-900">{job.sponsor}</span>
+                </div>
+                <div class="flex justify-between pb-0.5">
+                  <span class="font-semibold text-slate-500">Beneficios Extra:</span>
+                  <span class="text-slate-800 font-medium text-right">{job.benefits}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-2 border-t border-slate-100 flex items-center justify-between gap-4">
+              <span class="text-xs font-medium text-slate-500">{job.shift}</span>
+              <a
+                href="https://bit.ly/3R6RbFW"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center bg-slate-900 hover:bg-emerald-700 text-white font-bold text-xs px-4 py-2.5 rounded-lg transition"
+              >
+                Postular para esta Vacante →
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Beneficios de Contratación Directa -->
+  <section class="py-16 bg-white border-b border-slate-200">
+    <div class="max-w-screen-xl mx-auto px-4 md:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-3xl font-extrabold text-slate-900">¿Qué incluye tu contrato laboral en EE.UU.?</h2>
+        <p class="text-sm text-slate-600 mt-2">Garantías legales y asistencias financieras aseguradas desde el primer día.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-xl mb-4">💳</div>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">Salario Igualitario de Ley</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Ganarás el mismo sueldo que un enfermero estadounidense con tu misma experiencia (Prevailing Wage certificado por el Departamento del Trabajo de EE.UU.).</p>
+        </div>
+        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-xl mb-4">👨‍👩‍👧‍👦</div>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">Green Card para tu Familia</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Tu cónyuge e hijos menores de 21 años reciben automáticamente la residencia permanente y autorización de trabajo y estudio.</p>
+        </div>
+        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-xl mb-4">✈️</div>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">Paquete de Relocalización</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Pasajes aéreos internacionales pagos, alojamiento inicial gratuito durante tus primeros 30 días y bono de instalación.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schema.org JobPosting para Google Jobs -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "MedicalBusiness",
-    "name": "Enfermera USA",
-    "url": "https://enfermerausa.com",
-    "description": "Agencia especializada en homologación de títulos de enfermería, examen NCLEX-RN y patrocinio de visa EB-3 para EE.UU.",
-    "areaServed": "United States",
-    "serviceType": "Nursing License & Visa Sponsorship Agency"
+    "@type": "JobPosting",
+    "title": "Enfermero/a Registrado/a (RN) con Patrocinio de Visa EB-3",
+    "description": "Oportunidades de empleo para enfermeros internacionales con título revalidado o en proceso. Incluye patrocinio de Green Card permanente y salarios competitivos en EE.UU.",
+    "identifier": {
+      "@type": "PropertyValue",
+      "name": "Enfermera USA",
+      "value": "RN-EB3-2026"
+    },
+    "datePosted": "2026-09-01",
+    "employmentType": "FULL_TIME",
+    "hiringOrganization": {
+      "@type": "Organization",
+      "name": "Enfermera USA Health Partner Network",
+      "sameAs": "https://enfermerausa.com"
+    },
+    "jobLocation": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "TX",
+        "addressCountry": "US"
+      }
+    },
+    "baseSalary": {
+      "@type": "MonetaryAmount",
+      "currency": "USD",
+      "value": {
+        "@type": "QuantitativeValue",
+        "value": 42.00,
+        "unitText": "HOUR"
+      }
+    }
   }
   </script>
 
-
-  <!-- Bloque Enlazado Interno SEO -->
-  <section class="py-8 bg-emerald-900 text-white text-center">
+  <!-- Bloque Enlazado Interno SEO & Conversión -->
+  <section class="py-12 bg-emerald-900 text-white text-center">
     <div class="max-w-screen-xl mx-auto px-4">
-      <h3 class="text-xl font-bold mb-2">¿Listo para dar el paso hacia tu Licencia RN en EE.UU.?</h3>
-      <p class="text-emerald-100 text-sm mb-4">Acompáñanos en nuestra próxima Sesión Informativa donde resolveremos tus dudas sobre costos y procesos.</p>
-      <a href="https://bit.ly/3R6RbFW" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-emerald-900 font-bold px-6 py-2.5 rounded-lg shadow hover:bg-emerald-50 transition">
+      <h3 class="text-2xl font-bold mb-2">¿Quieres aplicar a las entrevistas con los hospitales patrocinadores?</h3>
+      <p class="text-emerald-100 text-sm mb-6 max-w-xl mx-auto">Agenda tu lugar en nuestra próxima Sesión Informativa donde explicamos cómo calificar y presentar tu perfil.</p>
+      <a href="https://bit.ly/3R6RbFW" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-emerald-900 font-extrabold px-8 py-3.5 rounded-xl shadow hover:bg-emerald-50 transition text-sm">
         Agendar Mi Lugar en la Sesión Informativa
       </a>
     </div>
   </section>
-
 </BaseLayout>

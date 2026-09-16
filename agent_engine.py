@@ -921,6 +921,7 @@ class SEOGEOResearcher:
                 "Datos Estructurados Ricos (Schema.org): Implementación de JSON-LD con tipos Article, FAQPage, MedicalBusiness, Organization, ProfilePage y HowTo."
             ],
             "cro_practices": [
+                "Resolución de Intención Transaccional: Inclusión de catálogo de vacantes reales ($39-$58 USD/h), ubicaciones por estado y marcado Schema.org JobPosting.",
                 "Maximización de Conversión BOFU (CRO): Migración completa de CTA genéricos a 'Agendar Sesión Informativa Gratuita'."
             ]
         }

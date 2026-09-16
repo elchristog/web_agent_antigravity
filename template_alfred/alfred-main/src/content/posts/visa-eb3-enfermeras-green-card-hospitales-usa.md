@@ -1,7 +1,7 @@
 ---
 pubDate: 2026-09-16
 team: "david-lee"
-title: "Visa EB-3 para Enfermeras: Residencia Permanente (Green Card) con Sponsor de Hospitales en EE.UU."
+title: "[Visa EB-3](/proceso-de-visa-y-relocalizacion-para-enfermeras/) para Enfermeras: Residencia Permanente (Green Card) con Sponsor de Hospitales en EE.UU."
 description: "Descubre cómo obtener la residencia permanente directa (Green Card) mediante el patrocinio de visa EB-3 para enfermeros profesionales y su familia."
 image:
   url: "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1200&auto=format&fit=crop"
