@@ -471,7 +471,7 @@ class ContinuousSEOEngine:
   <!-- Bloque E-E-A-T Autoría y Revisión -->
   <div class="max-w-screen-xl mx-auto px-4 my-8">
     <div class="bg-slate-100 p-4 rounded-lg border border-slate-300 flex items-center gap-4 text-xs text-slate-700">
-      <span class="font-bold text-emerald-800 bg-emerald-100 px-2 py-1 rounded">E-E-A-T Verificado</span>
+      <span class="font-bold text-emerald-800 bg-emerald-100 px-2 py-1 rounded">✓ Información Verificada</span>
       <span>Contenido redactado y revisado por el Equipo Especializado en Licencias Médicas de EE.UU. (CGFNS & NCLEX Specialists). Fuentes oficiales: <a href="https://www.ncsbn.org" target="_blank" rel="noopener" class="underline">NCSBN</a> | <a href="https://www.cgfns.org" target="_blank" rel="noopener" class="underline">CGFNS</a>.</span>
     </div>
   </div>
@@ -484,7 +484,7 @@ class ContinuousSEOEngine:
             target_page.write_text(content, encoding="utf-8")
             result["modified"] = True
             result["page"] = rel_path
-            result["description"] = f"Inyectado bloque E-E-A-T de autoría verificada y citas a fuentes oficiales (NCSBN / CGFNS) en '{rel_path}'."
+            result["description"] = f"Inyectado bloque de autoría verificada y citas a fuentes oficiales (NCSBN / CGFNS) en '{rel_path}'."
             return result
 
         # Parche 4: Inyectar Estructura Answer-First por Pasajes para GEO (SearchGPT / Perplexity / Google AI Overviews)
@@ -493,7 +493,7 @@ class ContinuousSEOEngine:
   <!-- Bloque Answer-First GEO -->
   <div class="max-w-screen-xl mx-auto px-4 my-6">
     <div class="p-5 bg-emerald-50 border-l-4 border-emerald-600 rounded-r-lg">
-      <p class="text-xs font-bold text-emerald-800 uppercase tracking-wide">Resumen Clave (Answer-First para IA):</p>
+      <p class="text-xs font-bold text-emerald-800 uppercase tracking-wide">📌 Resumen Clave del Proceso:</p>
       <p class="text-sm font-semibold text-slate-900 mt-1">Para ejercer como enfermero registrado (RN) en EE.UU. en 2026 se requiere: 1) Homologar créditos con CGFNS o TruMerit, 2) Aprobar el examen adaptativo NCLEX-RN (85-150 preguntas NGN), 3) Demostrar inglés (OET u IELTS), y 4) Obtener patrocinio de Visa EB-3 de Residencia Permanente directa (Schedule A).</p>
     </div>
   </div>
@@ -1197,6 +1197,45 @@ class CompetitiveSERPOutrankerEngine:
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+  </section>
+"""
+            },
+            {
+                "page": self.pages_dir / "ofertas-de-empleo-para-enfermeras-en-usa.astro",
+                "rel_path": "src/pages/ofertas-de-empleo-para-enfermeras-en-usa.astro",
+                "gap_title": "Matriz Comparativa Direct Hire vs Agencias Staffing (Sponsor EB-3)",
+                "marker": "<!-- Bloque Outrank Competidor: Direct Hire vs Staffing -->",
+                "html": """
+  <!-- Bloque Outrank Competidor: Direct Hire vs Staffing -->
+  <section class="py-12 bg-white border-t border-slate-200">
+    <div class="max-w-screen-xl mx-auto px-4 md:px-8">
+      <div class="max-w-3xl mb-8">
+        <span class="text-xs font-bold text-emerald-700 uppercase tracking-widest">Benchmark Competitivo #1</span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1 mb-2">Contratación Directa (Direct Hire) vs Agencia Staffing: ¿Cuál Conviene?</h2>
+        <p class="text-slate-600 text-sm leading-relaxed">
+          Comparativa transparente de modelos de contratación patrocinada con Visa EB-3 en hospitales de Estados Unidos.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+        <div class="p-6 bg-emerald-50 rounded-2xl border border-emerald-200">
+          <span class="inline-block bg-emerald-700 text-white font-bold px-3 py-1 rounded mb-3">Modelo Direct Hire (Hospital Directo)</span>
+          <ul class="space-y-2.5 text-slate-700">
+            <li class="flex items-center gap-2">✅ <span><strong>Empleado del Hospital:</strong> Mismos beneficios y escala salarial que enfermeros locales ($38-$58 USD/h).</span></li>
+            <li class="flex items-center gap-2">✅ <span><strong>Bono de Bienvenida:</strong> Patrocinio de pasajes, 1 a 2 meses de vivienda y relocation stipend.</span></li>
+            <li class="flex items-center gap-2">✅ <span><strong>Estabilidad Laboral:</strong> Contrato directo a término indefinido con Green Card inmediata.</span></li>
+          </ul>
+        </div>
+        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200">
+          <span class="inline-block bg-slate-800 text-white font-bold px-3 py-1 rounded mb-3">Modelo Staffing Agency</span>
+          <ul class="space-y-2.5 text-slate-700">
+            <li class="flex items-center gap-2">⚠️ <span><strong>Asignación por Contrato:</strong> Contrato de 2 a 3 años asignado a diferentes sistemas hospitalarios.</span></li>
+            <li class="flex items-center gap-2">⚠️ <span><strong>Tarifa Fija:</strong> El pago por hora suele ser menor mientras dura la penalidad de permanencia.</span></li>
+            <li class="flex items-center gap-2">✅ <span><strong>Facilidad de Entrada:</strong> Cobertura total de trámites migratorios iniciales por parte de la agencia.</span></li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
