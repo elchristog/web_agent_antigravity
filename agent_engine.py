@@ -1484,6 +1484,7 @@ class AlwaysImprovingCycleEngine:
         pages = [
             ("src/pages/index.astro", self.pages_dir / "index.astro", "Home Principal"),
             ("src/pages/evaluacion-y-homologacion-de-titulo-enfermeria-usa.astro", self.pages_dir / "evaluacion-y-homologacion-de-titulo-enfermeria-usa.astro", "Landing Homologación CGFNS/TruMerit"),
+            ("src/pages/validar-enfermeria-en-usa.astro", self.pages_dir / "validar-enfermeria-en-usa.astro", "Landing Validar Enfermería en USA"),
             ("src/pages/licencia-de-enfermeria-y-examen-nclex-usa.astro", self.pages_dir / "licencia-de-enfermeria-y-examen-nclex-usa.astro", "Landing Examen NCLEX-RN"),
             ("src/pages/ofertas-de-empleo-para-enfermeras-en-usa.astro", self.pages_dir / "ofertas-de-empleo-para-enfermeras-en-usa.astro", "Landing Empleos y Sponsor EB-3"),
             ("src/pages/proceso-de-visa-y-relocalizacion-para-enfermeras.astro", self.pages_dir / "proceso-de-visa-y-relocalizacion-para-enfermeras.astro", "Landing Visa EB-3 y Green Card"),
